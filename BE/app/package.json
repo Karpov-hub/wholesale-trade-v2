@@ -1,0 +1,41 @@
+{
+  "name": "wholesale-trade",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "babel-watch --watch src src/index.js",
+    "build": "babel src --out-dir ./dist --source-maps && cp -fr src/controller/jasperreports-6.18.1 dist/controller",
+    "start": "forever --minUptime 5000 --uid 'doctemplate' -a start dist/index.js"
+  },
+  "engines": {
+    "node": ">=16.x"
+  },
+  "dependencies": {
+    "@app/config": "^0.0.1",
+    "@app/db": "^1.0.0",
+    "@app/redis": "^1.0.0",
+    "axios": "^1.2.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonschema": "^1.4.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.7.1",
+    "nodemon": "^2.0.12",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.18.9",
+    "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.7.2",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0"
+  }
+}

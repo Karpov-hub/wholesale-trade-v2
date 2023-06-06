@@ -1,0 +1,24 @@
+{
+  "name": "jasper-report",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "lerna run start --parallel",
+    "watch": "lerna run watch --parallel",
+    "build": "lerna run build --parallel",
+    "migrate": "lerna run migrate",
+    "seed": "lerna run seed"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "app/"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "engines": {
+    "node": ">=16.x"
+  }
+}
