@@ -9,19 +9,28 @@ module.exports = {
         type: Sequelize.UUID,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       category_id: {
+        allowNull: false,
+        type: Sequelize.UUID,
+      },
+      user_id: {
+        allowNull: false,
         type: Sequelize.UUID,
       },
       image: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
 
       price: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       discount: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
 
@@ -32,9 +41,11 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       product_quantity: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       description: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
 

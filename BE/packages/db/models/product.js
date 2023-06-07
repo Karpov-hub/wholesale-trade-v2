@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "category_id",
         targetKey: "id",
       });
+      this.belongsTo(models.user, {
+        foreignKey: "user_id",
+        targetKey: "id",
+      });
     }
   }
   product.init(
@@ -17,17 +21,42 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
       },
-      name: DataTypes.STRING,
-      category_id: DataTypes.UUID,
-      image: DataTypes.TEXT,
+      name: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      category_id: {
+        allowNull: false,
+        type: DataTypes.UUID,
+      },
+      user_id: {
+        allowNull: false,
+        type: DataTypes.UUID,
+      },
+      image: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
 
-      price: DataTypes.STRING,
-      discount: DataTypes.INTEGER,
+      price: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      discount: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
 
       rating: DataTypes.INTEGER,
       reviews: DataTypes.TEXT,
-      product_quantity: DataTypes.INTEGER,
-      description: DataTypes.TEXT,
+      product_quantity: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      description: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
 
       ctime: DataTypes.DATE,
       mtime: DataTypes.DATE,

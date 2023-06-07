@@ -48,8 +48,19 @@ async function getProducts(req, res) {
       };
     }
 
-    let { count, rows } = await db.product.findAndCountAll(searchingOptions);
+    if (req.body.discount_min) {
+      searchingOptions.where.discount = {
+        [Op.gte]: req.body.discount_min,
+      };
+    }
 
+    let { count, rows } = await db.product.findAndCountAll(searchingOptions);
+    rows = rows.map((row) => {
+      return {
+        ...row.get(),
+        image: JSON.parse(row.image),
+      };
+    });
     return res.send({ success: true, count, rows });
   } catch (e) {
     return res.send({
@@ -109,9 +120,9 @@ async function createProduct(req, res) {
     await db.product.create({
       name: req.body.name,
       category_id: req.body.category_id,
+      user_id: user_id,
       image: JSON.stringify(req.body.image),
       price: req.body.price,
-      price: 0,
       rating: 0,
       reviews: 0,
       product_quantity: req.body.product_quantity,
