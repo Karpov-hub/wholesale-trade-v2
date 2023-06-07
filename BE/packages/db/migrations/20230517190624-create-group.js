@@ -20,6 +20,9 @@ module.exports = {
       favorites: {
         type: Sequelize.TEXT,
       },
+      users: {
+        type: Sequelize.TEXT,
+      },
       admin_id: {
         type: Sequelize.UUID,
         references: {

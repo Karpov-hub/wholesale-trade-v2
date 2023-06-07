@@ -76,6 +76,8 @@ async function GetProductDetails(req, res) {
       ],
     });
 
+    product.image = JSON.parse(product.image);
+
     return res.send({ success: true, product });
   } catch (e) {
     return res.send({
@@ -87,31 +89,38 @@ async function GetProductDetails(req, res) {
 
 async function createProduct(req, res) {
   try {
-    let user_id = await redis.get(req.body.session_token);
-    if (!user_id)
+    const user_id = await redis.get(req.body.session_token);
+    if (!user_id) {
       return res.send({
         code: "SESSIONEXPIRED",
       });
-
+    }
     const user = await db.user.findOne({
       where: { id: user_id },
-      attributes: ["id", "role", "activated", "block"],
+      attributes: ["id", "role"],
     });
 
-    if (user.role != 2 || user.activated == false || user.block == true)
+    if (user.role !== 2) {
       return res.send({
         code: "ACCESSDENIED",
       });
+    }
 
-    let nemedsstoreroduct = await db.product.create({
+    await db.product.create({
       name: req.body.name,
       category_id: req.body.category_id,
-      image: req.body.image,
+      image: JSON.stringify(req.body.image),
       price: req.body.price,
+      price: 0,
+      rating: 0,
+      reviews: 0,
       product_quantity: req.body.product_quantity,
       description: req.body.description,
       user_id: user.id,
+      ctime: new Date(),
+      mtime: new Date(),
     });
+
     return res.send({ success: true });
   } catch (e) {
     return res.send({ success: false });
@@ -120,18 +129,18 @@ async function createProduct(req, res) {
 
 async function deleteProduct(req, res) {
   try {
-    let user_id = await redis.get(req.body.session_token);
-    if (!user_id)
+    const user_id = await redis.get(req.body.session_token);
+    if (!user_id) {
       return res.send({
         code: "SESSIONEXPIRED",
       });
-
+    }
     const product = await db.product.findOne({
       where: { id: req.body.product_id },
-      attributes: ["id", "user_id"],
+      attributes: ["user_id"],
     });
 
-    if (user_id == product.user_id) {
+    if (user_id === product.user_id) {
       await db.product.destroy({
         where: { id: req.body.product_id },
       });

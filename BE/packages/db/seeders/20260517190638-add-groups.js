@@ -20,6 +20,8 @@ module.exports = {
           favorites:
             '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
           admin_id: "44b75e7f-07c0-43be-aa93-757f771bbd45",
+          users:
+            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
         },
       ]);
 

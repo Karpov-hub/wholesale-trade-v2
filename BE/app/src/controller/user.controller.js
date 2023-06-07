@@ -5,19 +5,18 @@ const redis = require("@app/redis");
 //Профиль
 async function signup(req, res) {
   try {
-    let existUser = await db.user.findOne({
+    const existUser = await db.user.findOne({
       where: { phone: req.body.phone },
     });
-    if (existUser != null) {
+
+    if (existUser) {
       return res.send({
         code: "PHONEALREADYREGISTERED",
-        message: "Sorry, you can't sign up with this phone id",
+        message: "Sorry, you can't sign up with this phone number.",
       });
     }
-    if (req.body.roll) {
-      req.body.roll = 1;
-    }
-    let newUser = await db.user.create({
+
+    await db.user.create({
       password: crypto
         .createHash("sha256")
         .update(req.body.password)
@@ -28,13 +27,19 @@ async function signup(req, res) {
       shopping_cart: "[]",
       favorites: "[]",
       delivery_address: "[]",
-      notifications:
-        '[{"name": "Registration","description": "Welcome to our service. We hope that our services will be useful to you."}]',
+      notifications: JSON.stringify([
+        {
+          name: "Registration",
+          description:
+            "Welcome to our service. We hope that our services will be useful to you.",
+        },
+      ]),
       phone: req.body.phone,
-      roll: req.body.roll,
+      roll: req.body.roll ? 1 : undefined,
       ctime: Date.now(),
       mtime: Date.now(),
     });
+
     return res.send({
       success: true,
       message: "Successful registration.",
@@ -124,13 +129,15 @@ async function logout(req, res) {
 
 async function getProfile(req, res) {
   try {
-    let user_id = await redis.get(req.body.session_token);
-    if (!user_id)
+    const user_id = await redis.get(req.body.session_token);
+
+    if (!user_id) {
       return res.send({
         code: "SESSIONEXPIRED",
       });
+    }
 
-    let user = await db.user.findOne({
+    const user = await db.user.findOne({
       where: { id: user_id },
       attributes: [
         "first_name",
@@ -141,12 +148,15 @@ async function getProfile(req, res) {
         "ctime",
       ],
     });
+
     user.delivery_address = JSON.parse(user.delivery_address);
+
     return res.send({ success: true, data: user });
-  } catch (e) {
+  } catch (error) {
     return res.send({ success: false });
   }
 }
+
 async function updateUser(req, res) {
   try {
     let user_id = await redis.get(req.body.session_token);

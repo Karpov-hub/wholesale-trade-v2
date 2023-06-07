@@ -120,7 +120,7 @@ module.exports = {
         session_token: { type: "string" },
         name: { type: "string", maxLength: 100 },
         category_id: { type: "string" },
-        image: { type: "object" },
+        image: { type: "string" },
         price: { type: "string", maxLength: 8 },
         product_quantity: { type: "integer" },
         description: { type: "string" },

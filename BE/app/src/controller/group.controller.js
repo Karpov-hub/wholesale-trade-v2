@@ -5,31 +5,34 @@ const redis = require("@app/redis");
 const { v4: uuidv4 } = require("uuid");
 async function createGroup(req, res) {
   try {
-    let user_id = await redis.get(req.body.session_token);
-    if (!user_id)
+    const sessionToken = req.body.session_token;
+    const userId = await redis.get(sessionToken);
+
+    if (!userId) {
       return res.send({
         code: "SESSIONEXPIRED",
       });
+    }
+
     const { name, description } = req.body;
 
-    // Проверка, существует ли группа с таким именем
-    const group = await db.group.findOne({
-      where: { name: name },
+    const existingGroup = await db.group.findOne({
+      where: { name },
     });
-    if (group) {
+
+    if (existingGroup) {
       return res.send({
         code: "GROUPEXIST",
         message: "Group with the same name already exists",
       });
     }
 
-    // Создание новой группы
     const newGroup = await db.group.create({
-      id: uuidv4(), // Генерация уникального идентификатора для группы
-      name: name,
-      description: description,
-      admin_id: user_id,
-      users: '[{"id":""}]',
+      id: uuidv4(),
+      name,
+      description,
+      admin_id: userId,
+      users: JSON.stringify([{ id: "" }]),
       ctime: new Date(),
       mtime: new Date(),
     });
@@ -259,16 +262,18 @@ async function getGroupMembers(req, res) {
 async function addGroupMember(req, res) {
   try {
     const { group_id, user_id, session_token } = req.body;
-    let admin_id = await redis.get(session_token);
-    if (!admin_id)
+    const admin_id = await redis.get(session_token);
+
+    if (!admin_id) {
       return res.send({
         code: "SESSIONEXPIRED",
       });
+    }
 
-    // Проверка, существует ли группа с указанным идентификатором
     const group = await db.group.findOne({
       where: { id: group_id },
     });
+
     if (!group) {
       return res.send({
         code: "GROUPNOTFOUND",
@@ -276,7 +281,6 @@ async function addGroupMember(req, res) {
       });
     }
 
-    // Проверка прав доступа: только администратор может добавить участника
     if (group.admin_id !== admin_id) {
       return res.send({
         code: "ACCESSDENIED",
@@ -284,15 +288,12 @@ async function addGroupMember(req, res) {
       });
     }
 
-    let members = group.users;
-
-    members = JSON.parse(members);
+    const members = JSON.parse(group.users);
     members.push(user_id);
-    members = JSON.stringify(members);
 
     await db.group.update(
       {
-        users: members,
+        users: JSON.stringify(members),
       },
       {
         where: {
@@ -300,8 +301,9 @@ async function addGroupMember(req, res) {
         },
       }
     );
+
     return res.send({ success: true });
-  } catch (e) {
+  } catch (error) {
     return res.send({ success: false });
   }
 }
@@ -457,6 +459,7 @@ async function createChat(req, res) {
   try {
     const { chatName, group_id, session_token } = req.body;
     const admin_id = await redis.get(session_token);
+
     if (!admin_id) {
       return res.send({
         code: "SESSIONEXPIRED",
@@ -464,20 +467,20 @@ async function createChat(req, res) {
       });
     }
 
-    // Проверка, является ли текущий пользователь администратором группы
     const group = await db.group.findOne({
-      where: { id: group_id, admin_id: admin_id },
+      where: { id: group_id, admin_id },
     });
+
     if (!group) {
       return res.send({
         code: "FORBIDDEN",
         message: "You are not the admin of the group",
       });
     }
-    // Создание нового чата
-    const chat = await db.chat.create({
+
+    await db.chat.create({
       name: chatName,
-      group_id: group_id,
+      group_id,
       messages: "[]",
       ctime: new Date(),
       mtime: new Date(),
@@ -486,8 +489,8 @@ async function createChat(req, res) {
     return res.send({
       success: true,
     });
-  } catch (e) {
-    console.error("Error when creating chat:", e);
+  } catch (error) {
+    console.error("Error when creating chat:", error);
     return res.send({
       success: false,
       message: "Error when creating chat",
