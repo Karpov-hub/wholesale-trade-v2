@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
       },
-      name: DataTypes.STRING(50),
+      name: DataTypes.STRING,
       category_id: DataTypes.UUID,
       image: DataTypes.TEXT,
 

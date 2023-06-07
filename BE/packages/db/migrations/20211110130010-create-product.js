@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.UUID,
       },
       name: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING,
       },
       category_id: {
         type: Sequelize.UUID,
