@@ -1,28 +1,29 @@
 const routes = [
   {
-    redirect: "products",
+    redirect: "store",
     path: "/",
-    component: () => import("src/layouts/LayoutCabinet.vue"),
+    component: () => import("src/layouts/DefaultLayout.vue"),
     children: [
       {
-        name: "main",
-        path: "main",
-        component: () => import("src/pages/PageMain.vue"),
+        name: "store",
+        path: "",
+        component: () => import("src/pages/StorePage.vue"),
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    component: () => import("src/layouts/AuthLayout.vue"),
+    children: [
+      {
+        name: "signin",
+        path: "signin",
+        component: () => import("src/pages/SigninPage.vue"),
       },
       {
-        name: "products",
-        path: "products",
-        component: () => import("src/pages/PageProducts.vue"),
-      },
-      {
-        name: "order",
-        path: "order",
-        component: () => import("src/pages/PageOrder.vue"),
-      },
-      {
-        name: "chat",
-        path: "chat",
-        component: () => import("src/pages/PageChat.vue"),
+        name: "signup",
+        path: "signup",
+        component: () => import("src/pages/SignupPage.vue"),
       },
     ],
   },

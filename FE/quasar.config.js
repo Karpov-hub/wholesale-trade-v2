@@ -12,7 +12,7 @@ const { configure } = require("quasar/wrappers");
 const path = require("path");
 // const { Notify, Loading } = require("quasar");
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure((/* ctx */) => {
   return {
     eslint: {
       // fix: true,
@@ -55,7 +55,7 @@ module.exports = configure(function (/* ctx */) {
         node: "node16",
       },
 
-      vueRouterMode: "hash", // available values: 'hash', 'history'
+      vueRouterMode: "history", // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -192,7 +192,7 @@ module.exports = configure(function (/* ctx */) {
         // appBundleId: '',
         // appCategoryType: '',
         // osxSign: '',
-        // protocol: 'myapp://path',
+        // protocol: 'myApp://path',
         // Windows only
         // win32metadata: { ... }
       },

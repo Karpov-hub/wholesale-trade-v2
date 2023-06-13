@@ -1,47 +1,24 @@
 <template>
   <q-layout view="hHh lpR lfr">
-    <q-header reveal bordered class="bg-primary text-white" height-hint="98">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+    <DefaultHeader @open-drawer="openDrawer()" />
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-          </q-avatar>
-          Title
-        </q-toolbar-title>
-      </q-toolbar>
+    <DefaultDrawer v-model="isDrawerOpened" />
 
-      <q-tabs align="left">
-        <q-route-tab to="/page1" label="Page One" />
-        <q-route-tab to="/page2" label="Page Two" />
-        <q-route-tab to="/page3" label="Page Three" />
-      </q-tabs>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered>
-      <!-- drawer content -->
-    </q-drawer>
-
-    <q-page-container>
+    <q-page-container class="full-height">
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
+<script setup>
+import DefaultHeader from "src/views/DefaultHeader.vue";
+import DefaultDrawer from "src/views/DefaultDrawer.vue";
+
 import { ref } from "vue";
 
-export default {
-  setup() {
-    const leftDrawerOpen = ref(false);
+const isDrawerOpened = ref(false);
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
-};
+function openDrawer() {
+  isDrawerOpened.value = true;
+}
 </script>

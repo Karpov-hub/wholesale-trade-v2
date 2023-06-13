@@ -17,6 +17,7 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: [
     "eslint:recommended",
+    "airbnb-base",
     "plugin:vue/vue3-recommended", // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
     "prettier",
   ],
@@ -26,6 +27,24 @@ module.exports = {
     // required to lint *.vue files
     "vue",
   ],
+
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          ["src", "./src"],
+          ["app", "."],
+          ["components", "./src/components"],
+          ["layouts", "./layouts"],
+          ["pages", "./src/pages"],
+          ["assets", "./src/assets"],
+          ["boot", "./src/boot"],
+          ["stores", "./src/stores"],
+        ],
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
+      },
+    },
+  },
 
   globals: {
     ga: "readonly", // Google Analytics
@@ -42,6 +61,19 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    "arrow-body-style": ["error", "always"],
+
+    "global-require": "off",
+
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
+
     "prefer-promise-reject-errors": "off",
 
     // allow debugger during development only
