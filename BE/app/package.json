@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "babel-watch --watch src src/index.js",
-    "build": "babel src --out-dir ./dist --source-maps && cp -fr src/controller/jasperreports-6.18.1 dist/controller",
-    "start": "forever --minUptime 5000 --uid 'doctemplate' -a start dist/index.js"
+    "start": "forever --minUptime 5000 --uid 'wholesale-trade' -a start src/index.js"
   },
   "engines": {
     "node": ">=16.x"

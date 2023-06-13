@@ -4,7 +4,7 @@ stages:
 
 tests:
   stage: tests
-  image: dm112/doctemplate-ci-base:0.0.1
+  image: dm112/wholesale-trade-ci-base:0.0.1
   services:
     - name: postgres:12.12
       alias: postgres
@@ -14,7 +14,7 @@ tests:
     - name: redis:latest
       alias: redis
   variables:
-    POSTGRES_DB: doctemplate
+    POSTGRES_DB: wholesale-trade
     POSTGRES_USER: docker
     POSTGRES_PASSWORD: docker
     POSTGRES_HOST_AUTH_METHOD: trust
@@ -59,15 +59,15 @@ deploy:
     - chmod 755 ./ci_project_build.sh
   script:
     - ./ci_project_build.sh
-    - rsync -ramz --stats --delete ./build/* $SSH_HOST:/home/ec2-user/doctemplate
-    - rsync -ramz --stats --delete ./app/swagger/swagger-output.json $SSH_HOST:/home/ec2-user/doctemplate/app/swagger
+    - rsync -ramz --stats --delete ./build/* $SSH_HOST:/home/ec2-user/wholesale-trade
+    - rsync -ramz --stats --delete ./app/swagger/swagger-output.json $SSH_HOST:/home/ec2-user/wholesale-trade/app/swagger
     - ssh $SSH_HOST '
       export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.342.b07-1.amzn2.0.1.x86_64 &&
       export PATH=$JAVA_HOME/lib:$PATH &&
-      (forever stop doctemplate || true) &&
-      (rm /home/ec2-user/.forever/doctemplate.log || true) &&
+      (forever stop wholesale-trade || true) &&
+      (rm /home/ec2-user/.forever/wholesale-trade.log || true) &&
       nvm use 16 &&
-      cd doctemplate/ &&
+      cd wholesale-trade/ &&
       export NODE_ENV=staging &&
       yarn cache clean &&
       yarn &&
