@@ -2,7 +2,6 @@
   <q-page class="container q-py-xl q-px-md">
     <q-btn
       v-if="route.query.category || route.query.name"
-      @click="router.push({ name: 'products' })"
       class="q-mb-xl"
       color="blue"
       rounded
@@ -10,6 +9,7 @@
       outline
       icon="arrow_back"
       label="Назад"
+      @click="router.push({ name: 'products' })"
     ></q-btn>
     <div class="q-mb-md text-h4">
       {{
@@ -57,10 +57,10 @@
         </div>
         <q-separator class="q-mt-lg"></q-separator>
         <div class="q-mt-sm q-gutter-md row justify-end">
-          <q-btn @click="resetFilters" :disable="!isFiltered" color="red"
+          <q-btn :disable="!isFiltered" color="red" @click="resetFilters"
             >Отменить</q-btn
           >
-          <q-btn @click="applyFilters" :disable="isFiltered" color="green"
+          <q-btn :disable="isFiltered" color="green" @click="applyFilters"
             >Применить</q-btn
           >
         </div>
@@ -98,9 +98,9 @@
             }"
           >
             <img
-              @click="showProductCard(product)"
               src="../assets/img/placeholder.png"
               style="width: 200px"
+              @click="showProductCard(product)"
             />
             <q-separator v-if="$q.screen.gt.sm" class="q-mx-md" vertical />
             <div class="col-grow column q-gutter-sm">
@@ -136,9 +136,9 @@
                 :class="{ 'justify-center': $q.screen.lt.sm }"
               >
                 <q-btn
-                  @click="showProductCard(product)"
                   :disabled="product.quantity == 0"
                   color="green"
+                  @click="showProductCard(product)"
                   >Добавить в корзину</q-btn
                 >
               </div>
@@ -157,10 +157,10 @@
               style="max-width: 250px; max-height: 250px"
             />
             <q-btn
-              @click="isShownModalProduct = false"
               round
               flat
               icon="close"
+              @click="isShownModalProduct = false"
             ></q-btn>
           </div>
 
@@ -187,8 +187,8 @@
             <div class="col-grow row q-gutter-sm items-center">
               <div>Количество:</div>
               <q-input
-                class="col-6"
                 v-model.number="state.quantity"
+                class="col-6"
                 min="1"
                 :max="state.selectedProduct.product_quantity"
                 outlined
@@ -198,7 +198,6 @@
               ></q-input>
             </div>
             <q-btn
-              @click="addProductToCart(state.selectedProduct)"
               :disable="state.selectedProduct.quantity == 0"
               class="col-grow"
               :class="{
@@ -208,6 +207,7 @@
               }"
               color="green"
               label="Добавить в корзину"
+              @click="addProductToCart(state.selectedProduct)"
             />
           </div>
         </q-card-section>
@@ -227,7 +227,7 @@ import { getProductDetails } from "src/services/service-products";
 import { getProducts } from "src/services/service-products";
 import { reactive, ref, watch, onMounted, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getData } from "src/services/service-profile";
+// import { getData } from "src/services/service-profile";
 
 const router = useRouter();
 const route = useRoute();
@@ -459,7 +459,7 @@ async function addProductToCart(product) {
     id_prod: product.id,
     quantity: state.quantity,
   });
-  const res2 = await getProductShoppingCartList({
+  await getProductShoppingCartList({
     session_token: localStorage.getItem("token"),
     start: 0,
   });

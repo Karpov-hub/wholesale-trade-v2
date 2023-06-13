@@ -1,8 +1,8 @@
 {
-  "name": "fe",
-  "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "name": "whosale-trade-fe",
+  "version": "0.0.2",
+  "description": "Whosale Trade Project",
+  "productName": "WhoSale",
   "author": "Michael Karpov",
   "private": true,
   "scripts": {
@@ -25,6 +25,7 @@
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@quasar/app-vite": "^1.4.3",
     "autoprefixer": "^10.4.14",
+    "dotenv": "^16.1.4",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-vue": "^9.14.1",

@@ -10,7 +10,7 @@
 
 const { configure } = require("quasar/wrappers");
 const path = require("path");
-const { Notify, Loading } = require("quasar");
+// const { Notify, Loading } = require("quasar");
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -64,7 +64,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: require("dotenv").config().parsed,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

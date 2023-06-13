@@ -404,21 +404,21 @@
 
 <script setup>
 import { reactive, ref, provide, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { Loading, Notify, useQuasar } from "quasar";
 import { signin, signup, logout } from "src/services/service-auth";
 import { getData } from "src/services/service-profile";
 import { useStoreCart } from "src/stores/storeCart";
 import {
   addProductShoppingCartList,
-  deleteProductShoppingCartList,
-  getProductShoppingCartList,
+  // deleteProductShoppingCartList,
+  // getProductShoppingCartList,
 } from "src/services/service-choppingCart";
-import { getCategories } from "src/services/service-category";
+// import { getCategories } from "src/services/service-category";
 
 const $q = useQuasar();
 const router = useRouter();
-const route = useRoute();
+// const route = useRoute();
 
 const storeCart = useStoreCart();
 provide("storeCart", storeCart);
@@ -426,10 +426,10 @@ provide("storeCart", storeCart);
 const tab = ref("tabSignin");
 
 const isShownSidebar = ref(false);
-const isShownSidebarLeft = ref(false);
+// const isShownSidebarLeft = ref(false);
 const isShownModalAuth = ref(false);
-const isShownModalProfile = ref(false);
-const isShownModalCart = ref(false);
+// const isShownModalProfile = ref(false);
+// const isShownModalCart = ref(false);
 const isAuthorized = ref(false);
 const isPwdVisible = ref(true);
 
@@ -488,80 +488,80 @@ onMounted(async () => {
   }, 10000);
 });
 
-function orderProducts() {
-  router.push({ name: "order" });
-}
-async function searchProducts() {
-  router.replace({ name: "products", query: { name: state.filters.search } });
-  state.filters.search = "";
-}
-async function showModalProfile() {
-  Loading.show();
-  const res = await getData({ session_token: localStorage.getItem("token") });
-  if (res.success) {
-    state.user = res.data;
-    state.userEdited = res.data;
-    isShownModalProfile.value = true;
-  } else {
-    Notify.create({
-      message: "Произошла ошибка",
-      icon: "error",
-      color: "negative",
-      position: "bottom",
-    });
-  }
-  Loading.hide();
-}
-function closeModalCart() {
-  isShownModalCart.value = false;
-  state.cart = [];
-}
-async function showModalCart() {
-  Loading.show;
-  const resp = await getData({ session_token: localStorage.getItem("token") });
-  if (!resp.success) {
-    state.cart = storeCart.getProducts();
-    Loading.show;
-    isShownModalCart.value = true;
-    return;
-  }
-  const res = await getProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    start: 0,
-  });
-  if (!res.success) {
-    Notify.create({
-      message: "Произошла ошибка",
-      icon: "error",
-      color: "negative",
-      position: "bottom",
-    });
-  }
-  state.cart = res;
-  isShownModalCart.value = true;
-}
-async function removeProductFromCart(product) {
-  Loading.show();
+// function orderProducts() {
+//   router.push({ name: "order" });
+// }
+// async function searchProducts() {
+//   router.replace({ name: "products", query: { name: state.filters.search } });
+//   state.filters.search = "";
+// }
+// async function showModalProfile() {
+//   Loading.show();
+//   const res = await getData({ session_token: localStorage.getItem("token") });
+//   if (res.success) {
+//     state.user = res.data;
+//     state.userEdited = res.data;
+//     isShownModalProfile.value = true;
+//   } else {
+//     Notify.create({
+//       message: "Произошла ошибка",
+//       icon: "error",
+//       color: "negative",
+//       position: "bottom",
+//     });
+//   }
+//   Loading.hide();
+// }
+// function closeModalCart() {
+//   isShownModalCart.value = false;
+//   state.cart = [];
+// }
+// async function showModalCart() {
+//   Loading.show;
+//   const resp = await getData({ session_token: localStorage.getItem("token") });
+//   if (!resp.success) {
+//     state.cart = storeCart.getProducts();
+//     Loading.show;
+//     isShownModalCart.value = true;
+//     return;
+//   }
+//   const res = await getProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     start: 0,
+//   });
+//   if (!res.success) {
+//     Notify.create({
+//       message: "Произошла ошибка",
+//       icon: "error",
+//       color: "negative",
+//       position: "bottom",
+//     });
+//   }
+//   state.cart = res;
+//   isShownModalCart.value = true;
+// }
+// async function removeProductFromCart(product) {
+//   Loading.show();
 
-  storeCart.removeProduct(product);
+//   storeCart.removeProduct(product);
 
-  if (localStorage.getItem("token") == "") {
-    Loading.hide();
-    return;
-  }
+//   if (localStorage.getItem("token") == "") {
+//     Loading.hide();
+//     return;
+//   }
 
-  await deleteProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    id_prod: product.id,
-  });
+//   await deleteProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     id_prod: product.id,
+//   });
 
-  const res2 = await getProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    start: 0,
-  });
-  state.cart.rows = res2.rows;
-  Loading.hide();
-}
+//   const res2 = await getProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     start: 0,
+//   });
+//   state.cart.rows = res2.rows;
+//   Loading.hide();
+// }
 async function doSignin() {
   const data = {
     phone: state.phone,
@@ -582,7 +582,7 @@ async function doSignin() {
     const cartProducts = storeCart.getProducts();
     if (cartProducts.rows.length > 0) {
       for (const product of cartProducts.rows) {
-        const res = await addProductShoppingCartList({
+        await addProductShoppingCartList({
           session_token: localStorage.getItem("token"),
           id_prod: product.id,
           quantity: product.product_quantity,
@@ -660,14 +660,14 @@ async function doLogout() {
   router.push({ name: "products" });
   Loading.hide();
 }
-async function showSidebarLeft() {
-  isShownSidebarLeft.value = true;
+// async function showSidebarLeft() {
+//   isShownSidebarLeft.value = true;
 
-  const res = await getCategories();
-}
-function showModalAuth() {
-  isShownModalAuth.value = true;
-}
+//   const res = await getCategories();
+// }
+// function showModalAuth() {
+//   isShownModalAuth.value = true;
+// }
 </script>
 
 <style>

@@ -250,8 +250,8 @@ const editedChat = ref({});
 const editedChatName = ref("");
 const isNameError = ref(false);
 const nameErrorMessage = ref("");
-const isMembersError = ref(false);
-const membersErrorMessage = ref("");
+// const isMembersError = ref(false);
+// const membersErrorMessage = ref("");
 
 function openEditDialog(chat) {
   editedChat.value = chat;
@@ -287,9 +287,9 @@ function saveEdit() {
   isNameError.value = false;
   nameErrorMessage.value = "";
 }
-function openAddDialog(chat) {
-  showAddDialog.value = true;
-}
+// function openAddDialog(chat) {
+//   showAddDialog.value = true;
+// }
 function cancelAdd() {
   showAddDialog.value = false;
   // Сброс ошибок и сообщений об ошибках
