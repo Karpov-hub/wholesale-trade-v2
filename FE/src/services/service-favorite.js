@@ -14,11 +14,11 @@ async function addProductFavorite({ session_token, id_prod }) {
   });
   return response.data;
 }
-async function daleteProductFavorite({ session_token, id_prod }) {
+async function deleteProductFavorite({ session_token, id_prod }) {
   const response = await api.post("/favorite/delete-product-Favorite", {
     session_token,
     id_prod,
   });
   return response.data;
 }
-export { getProductFavoriteList };
+export { getProductFavoriteList, addProductFavorite, deleteProductFavorite };

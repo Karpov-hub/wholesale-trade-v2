@@ -1,8 +1,13 @@
 import { api } from "../boot/axios.js";
-// app.use("/auth", authRouter);
 
 async function signup({ first_name, last_name, middle_name, phone, password }) {
-  const response = await api.post("user/auth/signup", {first_name, last_name, middle_name, phone, password });
+  const response = await api.post("user/auth/signup", {
+    first_name,
+    last_name,
+    middle_name,
+    phone,
+    password,
+  });
   return response.data;
 }
 async function signin({ phone, password }) {

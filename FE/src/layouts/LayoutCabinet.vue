@@ -33,17 +33,17 @@
           rounded
           clearable
         >
-          <template v-slot:append>
+          <template #append>
             <q-icon name="search" />
           </template>
         </q-input>
         <div class="col-4 row justify-end">
           <q-btn
-            @click="isShownSidebar = true"
             size="20px"
             flat
             label="Панель управления"
             icon-right="menu"
+            @click="isShownSidebar = true"
           />
         </div>
         <q-input
@@ -60,7 +60,7 @@
           rounded
           clearable
         >
-          <template v-slot:append>
+          <template #append>
             <q-icon name="search" />
           </template>
         </q-input>
@@ -80,11 +80,11 @@
         >
           <div class="text-white text-h5">Панель управления</div>
           <q-btn
-            @click="isShownSidebar = false"
             icon="close"
             color="white"
             round
             flat
+            @click="isShownSidebar = false"
           ></q-btn>
         </div>
         <div
@@ -103,22 +103,22 @@
         <div class="col-grow column justify-between">
           <div class="column">
             <q-btn
-              @click="router.push({ name: 'groups' })"
               class="q-py-md"
               label="Группы"
               icon="group"
               flat
               unelevated
               color="blue"
+              @click="router.push({ name: 'groups' })"
             />
             <q-btn
-              @click="router.push({ name: 'chat' })"
               class="q-py-md"
               icon="chat"
               label="Чаты"
               flat
               unelevated
               color="blue"
+              @click="router.push({ name: 'chat' })"
             />
           </div>
           <div class="column">
@@ -140,21 +140,21 @@
             />
             <q-btn
               v-if="!isAuthorized"
-              @click="isShownModalAuth = true"
               class="q-py-md"
               icon="login"
               label="Войти"
               unelevated
               color="blue"
+              @click="isShownModalAuth = true"
             />
             <q-btn
               v-if="isAuthorized"
-              @click="doLogout"
               class="q-py-md"
               icon="logout"
               label="Выйти"
               unelevated
               color="blue"
+              @click="doLogout"
             />
           </div>
         </div>
@@ -253,7 +253,7 @@
       </div>
     </q-drawer> -->
 
-    <q-page-container >
+    <q-page-container>
       <router-view />
     </q-page-container>
 
@@ -262,9 +262,9 @@
     </q-footer>
 
     <q-dialog
+      v-model="isShownModalAuth"
       :maximized="$q.screen.lt.sm"
       :full-width="$q.screen.lt.sm"
-      v-model="isShownModalAuth"
     >
       <q-card style="width: 500px">
         <q-tabs
@@ -307,7 +307,7 @@
                   label="Пароль"
                   :type="isPwdVisible ? 'password' : 'text'"
                 >
-                  <template v-slot:append>
+                  <template #append>
                     <q-icon
                       :name="isPwdVisible ? 'visibility_off' : 'visibility'"
                       class="cursor-pointer"
@@ -318,13 +318,13 @@
               </div>
               <div class="q-pt-xl row full-width justify-between">
                 <q-btn
-                  @click="isShownModalAuth = false"
                   class="col-5 q-ml-md"
                   color
                   rounded
                   outline
+                  @click="isShownModalAuth = false"
                   >Отменить</q-btn
-                ><q-btn @click="doSignin" class="col-5" color="green" rounded
+                ><q-btn class="col-5" color="green" rounded @click="doSignin"
                   >Подтвердить</q-btn
                 >
               </div>
@@ -373,7 +373,7 @@
                   label="Пароль"
                   :type="isPwdVisible ? 'password' : 'text'"
                 >
-                  <template v-slot:append>
+                  <template #append>
                     <q-icon
                       :name="isPwdVisible ? 'visibility_off' : 'visibility'"
                       class="cursor-pointer"
@@ -384,13 +384,13 @@
               </div>
               <div class="q-pt-xl row full-width justify-between">
                 <q-btn
-                  @click="isShownModalAuth = false"
                   class="col-5 q-ml-md"
                   color
                   rounded
                   outline
+                  @click="isShownModalAuth = false"
                   >Отменить</q-btn
-                ><q-btn @click="doSignup" class="col-5" color="green" rounded
+                ><q-btn class="col-5" color="green" rounded @click="doSignup"
                   >Подтвердить</q-btn
                 >
               </div>
