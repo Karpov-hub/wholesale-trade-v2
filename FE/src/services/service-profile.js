@@ -1,4 +1,5 @@
 import { api } from "../boot/axios.js";
+
 async function getData({ session_token }) {
   const response = await api.post("user/profile/get-data", {
     session_token,

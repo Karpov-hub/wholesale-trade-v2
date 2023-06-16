@@ -41,7 +41,7 @@ async function createProduct({
     category_id: categoryId,
     image,
     price,
-    description: description,
+    description,
     product_quantity: quantity,
   });
   return response.data;

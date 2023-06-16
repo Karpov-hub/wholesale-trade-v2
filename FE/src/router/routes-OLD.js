@@ -2,27 +2,27 @@ const routes = [
   {
     redirect: "products",
     path: "/",
-    component: () => import("src/layouts/LayoutCabinet.vue"),
+    component: () => {return import("src/layouts/LayoutCabinet.vue")},
     children: [
       {
         name: "main",
         path: "main",
-        component: () => import("src/pages/PageMain.vue"),
+        component: () => {return import("src/pages/PageMain.vue")},
       },
       {
         name: "products",
         path: "products",
-        component: () => import("src/pages/PageProducts.vue"),
+        component: () => {return import("src/pages/PageProducts.vue")},
       },
       {
         name: "order",
         path: "order",
-        component: () => import("src/pages/PageOrder.vue"),
+        component: () => {return import("src/pages/PageOrder.vue")},
       },
       {
         name: "chat",
         path: "chat",
-        component: () => import("src/pages/PageChat.vue"),
+        component: () => {return import("src/pages/PageChat.vue")},
       },
     ],
   },
@@ -31,7 +31,7 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue"),
+    component: () => {return import("pages/ErrorNotFound.vue")},
   },
 ];
 

@@ -2,28 +2,28 @@ const routes = [
   {
     redirect: "store",
     path: "/",
-    component: () => import("src/layouts/DefaultLayout.vue"),
+    component: () => {return import("src/layouts/DefaultLayout.vue")},
     children: [
       {
         name: "store",
         path: "",
-        component: () => import("src/pages/StorePage.vue"),
+        component: () => {return import("src/pages/StorePage.vue")},
       },
     ],
   },
   {
     path: "/auth",
-    component: () => import("src/layouts/AuthLayout.vue"),
+    component: () => {return import("src/layouts/AuthLayout.vue")},
     children: [
       {
         name: "signin",
         path: "signin",
-        component: () => import("src/pages/SigninPage.vue"),
+        component: () => {return import("src/pages/SigninPage.vue")},
       },
       {
         name: "signup",
         path: "signup",
-        component: () => import("src/pages/SignupPage.vue"),
+        component: () => {return import("src/pages/SignupPage.vue")},
       },
     ],
   },
@@ -32,7 +32,7 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue"),
+    component: () => {return import("pages/ErrorNotFound.vue")},
   },
 ];
 
