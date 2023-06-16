@@ -63,7 +63,11 @@ module.exports = {
   rules: {
     "arrow-body-style": ["error", "always"],
 
+    "import/prefer-default-export": "off",
+
     "global-require": "off",
+
+    "no-plusplus": "off",
 
     "import/no-extraneous-dependencies": [
       "error",

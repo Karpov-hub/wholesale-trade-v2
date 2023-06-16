@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import ToolbarBrandLogo from "src/views/ToolbarBrandLogo";
+import ToolbarBrandLogo from "src/views/ToolbarBrandLogo.vue";
 
 const emit = defineEmits(["openDrawer"]);
 
