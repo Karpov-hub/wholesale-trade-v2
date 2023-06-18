@@ -25,9 +25,9 @@
             style="margin-left: -24px"
           >
             <q-card
-              class="card-small"
               v-for="product in slideProducts"
               :key="product.id"
+              class="card-small"
             >
               <q-card-section>
                 <q-img

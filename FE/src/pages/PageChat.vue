@@ -5,16 +5,16 @@
     </div>
     <div class="row">
       <div class="col-5 column">
-        <q-btn @click="openAddDialog" class="q-mr-md" color="primary" icon="add"
+        <q-btn class="q-mr-md" color="primary" icon="add" @click="openAddDialog"
           >Добавить</q-btn
         >
         <div class="chat-list">
           <q-card
             v-for="chat in chats"
             :key="chat.id"
-            @click="selectChat(chat)"
             class="q-mt-md cursor-pointer"
             :class="{ selected: selectedChat.name === chat.name }"
+            @click="selectChat(chat)"
           >
             <q-card-section>
               <q-avatar rounded size="40px" color="primary">
@@ -26,7 +26,7 @@
               </div>
             </q-card-section>
             <q-card-actions align="right">
-              <q-btn @click="openEditDialog(chat)" flat dense icon="edit"
+              <q-btn flat dense icon="edit" @click="openEditDialog(chat)"
                 >Изменить</q-btn
               >
               <q-btn
@@ -71,15 +71,15 @@
               :error-message="errorMessage"
               :validation="validation"
             >
-              <template v-slot:append>
+              <template #append>
                 <q-icon
                   name="send"
                   class="message-send-icon"
-                  @click="sendMessage"
                   :class="{
                     'text-green': newMessage.trim().length > 0,
                     'text-red': newMessage.trim().length == 0,
                   }"
+                  @click="sendMessage"
                 />
               </template>
             </q-input>
@@ -250,8 +250,8 @@ const editedChat = ref({});
 const editedChatName = ref("");
 const isNameError = ref(false);
 const nameErrorMessage = ref("");
-const isMembersError = ref(false);
-const membersErrorMessage = ref("");
+// const isMembersError = ref(false);
+// const membersErrorMessage = ref("");
 
 function openEditDialog(chat) {
   editedChat.value = chat;
@@ -287,9 +287,9 @@ function saveEdit() {
   isNameError.value = false;
   nameErrorMessage.value = "";
 }
-function openAddDialog(chat) {
-  showAddDialog.value = true;
-}
+// function openAddDialog(chat) {
+//   showAddDialog.value = true;
+// }
 function cancelAdd() {
   showAddDialog.value = false;
   // Сброс ошибок и сообщений об ошибках

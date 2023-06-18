@@ -1,28 +1,60 @@
 const routes = [
   {
-    redirect: "products",
+    redirect: "store",
     path: "/",
-    component: () => import("src/layouts/LayoutCabinet.vue"),
+    component: () => {
+      return import("src/layouts/DefaultLayout.vue");
+    },
     children: [
       {
-        name: "main",
-        path: "main",
-        component: () => import("src/pages/PageMain.vue"),
+        name: "store",
+        path: "",
+        component: () => {
+          return import("src/pages/StorePage.vue");
+        },
       },
       {
-        name: "products",
-        path: "products",
-        component: () => import("src/pages/PageProducts.vue"),
+        name: "profile",
+        path: "profile",
+        component: () => {
+          return import("src/pages/ProfilePage.vue");
+        },
       },
       {
-        name: "order",
-        path: "order",
-        component: () => import("src/pages/PageOrder.vue"),
+        name: "favorites",
+        path: "favorites",
+        component: () => {
+          return import("src/pages/FavoritesPage.vue");
+        },
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    component: () => {
+      return import("src/layouts/AuthLayout.vue");
+    },
+    children: [
+      {
+        name: "signin",
+        path: "signin",
+        component: () => {
+          return import("src/pages/SigninPage.vue");
+        },
       },
       {
-        name: "chat",
-        path: "chat",
-        component: () => import("src/pages/PageChat.vue"),
+        name: "signinAdmin",
+        path: "admin",
+        component: () => {
+          return import("src/pages/SigninPage.vue");
+        },
+      },
+      {
+        name: "signup",
+        path: "signup",
+        component: () => {
+          return import("src/pages/SignupPage.vue");
+        },
       },
     ],
   },
@@ -31,7 +63,9 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue"),
+    component: () => {
+      return import("pages/ErrorNotFound.vue");
+    },
   },
 ];
 

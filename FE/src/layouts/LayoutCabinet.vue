@@ -33,17 +33,17 @@
           rounded
           clearable
         >
-          <template v-slot:append>
+          <template #append>
             <q-icon name="search" />
           </template>
         </q-input>
         <div class="col-4 row justify-end">
           <q-btn
-            @click="isShownSidebar = true"
             size="20px"
             flat
             label="Панель управления"
             icon-right="menu"
+            @click="isShownSidebar = true"
           />
         </div>
         <q-input
@@ -60,7 +60,7 @@
           rounded
           clearable
         >
-          <template v-slot:append>
+          <template #append>
             <q-icon name="search" />
           </template>
         </q-input>
@@ -80,11 +80,11 @@
         >
           <div class="text-white text-h5">Панель управления</div>
           <q-btn
-            @click="isShownSidebar = false"
             icon="close"
             color="white"
             round
             flat
+            @click="isShownSidebar = false"
           ></q-btn>
         </div>
         <div
@@ -103,22 +103,22 @@
         <div class="col-grow column justify-between">
           <div class="column">
             <q-btn
-              @click="router.push({ name: 'groups' })"
               class="q-py-md"
               label="Группы"
               icon="group"
               flat
               unelevated
               color="blue"
+              @click="router.push({ name: 'groups' })"
             />
             <q-btn
-              @click="router.push({ name: 'chat' })"
               class="q-py-md"
               icon="chat"
               label="Чаты"
               flat
               unelevated
               color="blue"
+              @click="router.push({ name: 'chat' })"
             />
           </div>
           <div class="column">
@@ -140,21 +140,21 @@
             />
             <q-btn
               v-if="!isAuthorized"
-              @click="isShownModalAuth = true"
               class="q-py-md"
               icon="login"
               label="Войти"
               unelevated
               color="blue"
+              @click="isShownModalAuth = true"
             />
             <q-btn
               v-if="isAuthorized"
-              @click="doLogout"
               class="q-py-md"
               icon="logout"
               label="Выйти"
               unelevated
               color="blue"
+              @click="doLogout"
             />
           </div>
         </div>
@@ -253,7 +253,7 @@
       </div>
     </q-drawer> -->
 
-    <q-page-container >
+    <q-page-container>
       <router-view />
     </q-page-container>
 
@@ -262,9 +262,9 @@
     </q-footer>
 
     <q-dialog
+      v-model="isShownModalAuth"
       :maximized="$q.screen.lt.sm"
       :full-width="$q.screen.lt.sm"
-      v-model="isShownModalAuth"
     >
       <q-card style="width: 500px">
         <q-tabs
@@ -307,7 +307,7 @@
                   label="Пароль"
                   :type="isPwdVisible ? 'password' : 'text'"
                 >
-                  <template v-slot:append>
+                  <template #append>
                     <q-icon
                       :name="isPwdVisible ? 'visibility_off' : 'visibility'"
                       class="cursor-pointer"
@@ -318,13 +318,13 @@
               </div>
               <div class="q-pt-xl row full-width justify-between">
                 <q-btn
-                  @click="isShownModalAuth = false"
                   class="col-5 q-ml-md"
                   color
                   rounded
                   outline
+                  @click="isShownModalAuth = false"
                   >Отменить</q-btn
-                ><q-btn @click="doSignin" class="col-5" color="green" rounded
+                ><q-btn class="col-5" color="green" rounded @click="doSignin"
                   >Подтвердить</q-btn
                 >
               </div>
@@ -373,7 +373,7 @@
                   label="Пароль"
                   :type="isPwdVisible ? 'password' : 'text'"
                 >
-                  <template v-slot:append>
+                  <template #append>
                     <q-icon
                       :name="isPwdVisible ? 'visibility_off' : 'visibility'"
                       class="cursor-pointer"
@@ -384,13 +384,13 @@
               </div>
               <div class="q-pt-xl row full-width justify-between">
                 <q-btn
-                  @click="isShownModalAuth = false"
                   class="col-5 q-ml-md"
                   color
                   rounded
                   outline
+                  @click="isShownModalAuth = false"
                   >Отменить</q-btn
-                ><q-btn @click="doSignup" class="col-5" color="green" rounded
+                ><q-btn class="col-5" color="green" rounded @click="doSignup"
                   >Подтвердить</q-btn
                 >
               </div>
@@ -404,21 +404,21 @@
 
 <script setup>
 import { reactive, ref, provide, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { Loading, Notify, useQuasar } from "quasar";
 import { signin, signup, logout } from "src/services/service-auth";
 import { getData } from "src/services/service-profile";
 import { useStoreCart } from "src/stores/storeCart";
 import {
   addProductShoppingCartList,
-  deleteProductShoppingCartList,
-  getProductShoppingCartList,
+  // deleteProductShoppingCartList,
+  // getProductShoppingCartList,
 } from "src/services/service-choppingCart";
-import { getCategories } from "src/services/service-category";
+// import { getCategories } from "src/services/service-category";
 
 const $q = useQuasar();
 const router = useRouter();
-const route = useRoute();
+// const route = useRoute();
 
 const storeCart = useStoreCart();
 provide("storeCart", storeCart);
@@ -426,10 +426,10 @@ provide("storeCart", storeCart);
 const tab = ref("tabSignin");
 
 const isShownSidebar = ref(false);
-const isShownSidebarLeft = ref(false);
+// const isShownSidebarLeft = ref(false);
 const isShownModalAuth = ref(false);
-const isShownModalProfile = ref(false);
-const isShownModalCart = ref(false);
+// const isShownModalProfile = ref(false);
+// const isShownModalCart = ref(false);
 const isAuthorized = ref(false);
 const isPwdVisible = ref(true);
 
@@ -488,80 +488,80 @@ onMounted(async () => {
   }, 10000);
 });
 
-function orderProducts() {
-  router.push({ name: "order" });
-}
-async function searchProducts() {
-  router.replace({ name: "products", query: { name: state.filters.search } });
-  state.filters.search = "";
-}
-async function showModalProfile() {
-  Loading.show();
-  const res = await getData({ session_token: localStorage.getItem("token") });
-  if (res.success) {
-    state.user = res.data;
-    state.userEdited = res.data;
-    isShownModalProfile.value = true;
-  } else {
-    Notify.create({
-      message: "Произошла ошибка",
-      icon: "error",
-      color: "negative",
-      position: "bottom",
-    });
-  }
-  Loading.hide();
-}
-function closeModalCart() {
-  isShownModalCart.value = false;
-  state.cart = [];
-}
-async function showModalCart() {
-  Loading.show;
-  const resp = await getData({ session_token: localStorage.getItem("token") });
-  if (!resp.success) {
-    state.cart = storeCart.getProducts();
-    Loading.show;
-    isShownModalCart.value = true;
-    return;
-  }
-  const res = await getProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    start: 0,
-  });
-  if (!res.success) {
-    Notify.create({
-      message: "Произошла ошибка",
-      icon: "error",
-      color: "negative",
-      position: "bottom",
-    });
-  }
-  state.cart = res;
-  isShownModalCart.value = true;
-}
-async function removeProductFromCart(product) {
-  Loading.show();
+// function orderProducts() {
+//   router.push({ name: "order" });
+// }
+// async function searchProducts() {
+//   router.replace({ name: "products", query: { name: state.filters.search } });
+//   state.filters.search = "";
+// }
+// async function showModalProfile() {
+//   Loading.show();
+//   const res = await getData({ session_token: localStorage.getItem("token") });
+//   if (res.success) {
+//     state.user = res.data;
+//     state.userEdited = res.data;
+//     isShownModalProfile.value = true;
+//   } else {
+//     Notify.create({
+//       message: "Произошла ошибка",
+//       icon: "error",
+//       color: "negative",
+//       position: "bottom",
+//     });
+//   }
+//   Loading.hide();
+// }
+// function closeModalCart() {
+//   isShownModalCart.value = false;
+//   state.cart = [];
+// }
+// async function showModalCart() {
+//   Loading.show;
+//   const resp = await getData({ session_token: localStorage.getItem("token") });
+//   if (!resp.success) {
+//     state.cart = storeCart.getProducts();
+//     Loading.show;
+//     isShownModalCart.value = true;
+//     return;
+//   }
+//   const res = await getProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     start: 0,
+//   });
+//   if (!res.success) {
+//     Notify.create({
+//       message: "Произошла ошибка",
+//       icon: "error",
+//       color: "negative",
+//       position: "bottom",
+//     });
+//   }
+//   state.cart = res;
+//   isShownModalCart.value = true;
+// }
+// async function removeProductFromCart(product) {
+//   Loading.show();
 
-  storeCart.removeProduct(product);
+//   storeCart.removeProduct(product);
 
-  if (localStorage.getItem("token") == "") {
-    Loading.hide();
-    return;
-  }
+//   if (localStorage.getItem("token") == "") {
+//     Loading.hide();
+//     return;
+//   }
 
-  await deleteProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    id_prod: product.id,
-  });
+//   await deleteProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     id_prod: product.id,
+//   });
 
-  const res2 = await getProductShoppingCartList({
-    session_token: localStorage.getItem("token"),
-    start: 0,
-  });
-  state.cart.rows = res2.rows;
-  Loading.hide();
-}
+//   const res2 = await getProductShoppingCartList({
+//     session_token: localStorage.getItem("token"),
+//     start: 0,
+//   });
+//   state.cart.rows = res2.rows;
+//   Loading.hide();
+// }
 async function doSignin() {
   const data = {
     phone: state.phone,
@@ -582,7 +582,7 @@ async function doSignin() {
     const cartProducts = storeCart.getProducts();
     if (cartProducts.rows.length > 0) {
       for (const product of cartProducts.rows) {
-        const res = await addProductShoppingCartList({
+        await addProductShoppingCartList({
           session_token: localStorage.getItem("token"),
           id_prod: product.id,
           quantity: product.product_quantity,
@@ -660,14 +660,14 @@ async function doLogout() {
   router.push({ name: "products" });
   Loading.hide();
 }
-async function showSidebarLeft() {
-  isShownSidebarLeft.value = true;
+// async function showSidebarLeft() {
+//   isShownSidebarLeft.value = true;
 
-  const res = await getCategories();
-}
-function showModalAuth() {
-  isShownModalAuth.value = true;
-}
+//   const res = await getCategories();
+// }
+// function showModalAuth() {
+//   isShownModalAuth.value = true;
+// }
 </script>
 
 <style>
