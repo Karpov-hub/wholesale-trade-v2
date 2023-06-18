@@ -5,5 +5,3 @@
 /node_modules
 .eslintrc.js
 
-//TODO: REMOVE THIS LATER
-/src/services/**/*

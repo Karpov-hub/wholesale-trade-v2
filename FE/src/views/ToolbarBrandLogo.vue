@@ -1,6 +1,6 @@
 <template>
   <q-toolbar-title
-    class="flex align-end cursor-pointer non-selectable"
+    class="flex align-end cursor-pointer non-selectable col-shrink q-mr-auto"
     @click="$router.push({ name: 'store' })"
   >
     <q-avatar size="md">

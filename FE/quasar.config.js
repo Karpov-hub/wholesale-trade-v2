@@ -10,7 +10,6 @@
 
 const { configure } = require("quasar/wrappers");
 const path = require("path");
-// const { Notify, Loading } = require("quasar");
 
 module.exports = configure((/* ctx */) => {
   return {
@@ -29,7 +28,7 @@ module.exports = configure((/* ctx */) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ["i18n", "axios"],
+    boot: ["i18n", "axios", "vee-validate", "global-components"],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ["app.scss"],
@@ -100,7 +99,19 @@ module.exports = configure((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        notify: {
+          position: "top",
+          color: "black",
+          actions: [
+            {
+              icon: "close",
+              color: "black",
+              round: true,
+            },
+          ],
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

@@ -5,6 +5,7 @@ import {
   createWebHistory,
   createWebHashHistory,
 } from "vue-router";
+import { useUserStore } from "src/stores/userStore";
 import routes from "./routes";
 
 /*
@@ -37,6 +38,41 @@ export default route((/* { store, ssrContext } */) => {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
+  });
+
+  // ✅ Fetches user profile from the server if founds session token
+  Router.beforeEach(async () => {
+    const userStore = useUserStore();
+
+    const sessionToken = localStorage.getItem("sessionToken");
+
+    if (sessionToken) {
+      await userStore.fetchUserProfile();
+    }
+
+    return true;
+  });
+
+  // ❗️ Avoid redirecting to auth pages if user is already authenticated
+  Router.beforeEach((to) => {
+    const userStore = useUserStore();
+
+    if (userStore.isAuthenticated && ["signin", "signup"].includes(to.name)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  Router.beforeEach((to) => {
+    const userStore = useUserStore();
+
+    if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+      // TODO: add ability to remember path
+      return { name: "signin" };
+    }
+
+    return true;
   });
 
   return Router;

@@ -1,6 +1,7 @@
 import { boot } from "quasar/wrappers";
 import axios from "axios";
-
+import { errorCodes } from "src/helpers/apiErrorCodes";
+import { Notify } from "quasar";
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
 // If any client changes this (global) instance, it might be a
@@ -9,6 +10,33 @@ import axios from "axios";
 // for each client)
 
 const api = axios.create({ baseURL: process.env.API_URL });
+
+api.interceptors.request.use((config) => {
+  const sessionToken = localStorage.getItem("sessionToken");
+
+  const updatedConfig = {
+    ...config,
+    data: {
+      ...config.data,
+      ...(!!sessionToken && { session_token: sessionToken }),
+    },
+  };
+
+  return updatedConfig;
+});
+
+api.interceptors.response.use((response) => {
+  const isError = Object.keys(errorCodes).includes(response.data.code);
+  const errorMessage = errorCodes[response.data.code];
+
+  if (isError) {
+    Notify.create({
+      message: errorMessage,
+      type: "warning",
+    });
+  }
+  return response;
+});
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

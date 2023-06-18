@@ -443,6 +443,13 @@
     "@types/mime" "*"
     "@types/node" "*"
 
+"@vee-validate/rules@^4.9.6":
+  version "4.9.6"
+  resolved "https://registry.yarnpkg.com/@vee-validate/rules/-/rules-4.9.6.tgz#cc4c6f0acbdd5499a0c0d1cad129d0f0d0597202"
+  integrity sha512-Cr3igYRxmSMYz54W2fcWn38QHkpkggT9N1nSvEODVR020XtLTEXVuPOokWKhzG8DCxia0h8FVCq760djXc06Kg==
+  dependencies:
+    vee-validate "^4.9.6"
+
 "@vitejs/plugin-vue@^2.2.0":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-2.3.4.tgz#966a6279060eb2d9d1a02ea1a331af071afdcf9e"
@@ -3390,6 +3397,11 @@ type-fest@^0.21.3:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
   integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
 
+type-fest@^3.10.0:
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-3.12.0.tgz#4ce26edc1ccc59fc171e495887ef391fe1f5280e"
+  integrity sha512-qj9wWsnFvVEMUDbESiilKeXeHL7FwwiFcogfhfyjmvT968RXSvnl23f1JOClTHYItsi7o501C/7qVllscUP3oA==
+
 type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
@@ -3466,6 +3478,14 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+vee-validate@^4.9.6:
+  version "4.9.6"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.9.6.tgz#9618b210d4d04ac8f4e3cf989a9e1166ad123ad7"
+  integrity sha512-2WYuetx76nH1UXUNM/OBvh9W0kGrr37xo9PgroHcDEbfpxum4MMMb4TjIkYdmrosE2YU54SoUnJrchYegmV2Kg==
+  dependencies:
+    "@vue/devtools-api" "^6.5.0"
+    type-fest "^3.10.0"
 
 vite@^2.9.13:
   version "2.9.16"
