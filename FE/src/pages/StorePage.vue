@@ -53,8 +53,8 @@
               :step="1"
               label
               snap
-              :left-label-value="`>= ${filters.price.min} ₽`"
-              :right-label-value="`>= ${filters.price.max} ₽`"
+              :left-label-value="`>= ${filters.price.min} $`"
+              :right-label-value="`>= ${filters.price.max} $`"
               @change="acceptPriceFilter()"
             />
           </q-card-section>
@@ -199,14 +199,11 @@ watch(
     ];
   },
   async () => {
-    console.log("isCategoriesNeeded", isCategoriesNeeded.value);
-    console.log("isCategoriesLoaded", isCategoriesLoaded.value);
     if (isCategoriesLoaded.value === false && route.query.category) {
       return;
     }
     resetPagination();
     fetchProducts();
-    console.log("called");
   },
   {
     immediate: true,

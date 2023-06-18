@@ -22,7 +22,7 @@ export async function getProduct({
   return convertObjectToCamelCase(response.data);
 }
 export async function getProductDetails(productId) {
-  const response = await api.post("product/get-product", {
+  const response = await api.post("product/get-product-details", {
     product_id: productId,
   });
   return convertObjectToCamelCase(response.data);

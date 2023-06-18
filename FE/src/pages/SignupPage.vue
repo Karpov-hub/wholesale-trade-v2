@@ -48,6 +48,9 @@
 <script setup>
 import { useForm } from "vee-validate";
 import { signup } from "src/services/userAuthService";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const validationSchema = {
   phone: "required|numeric",
@@ -59,7 +62,12 @@ const validationSchema = {
 
 const { handleSubmit, isSubmitting } = useForm({ validationSchema });
 
-const onSubmit = handleSubmit((values) => {
-  signup(values);
+const onSubmit = handleSubmit(async (values) => {
+  const response = await signup(values);
+
+  if (!response.success) {
+    return;
+  }
+  router.push({ name: "store" });
 });
 </script>
