@@ -74,20 +74,10 @@ async function GetProductDetails(req, res) {
   try {
     const product = await db.product.findOne({
       where: { id: req.body.product_id },
-      attributes: [
-        "id",
-        "name",
-        "image",
-        "price",
-        "discount",
-        "rating",
-        "reviews",
-        "product_quantity",
-        "description",
-      ],
     });
 
     product.image = JSON.parse(product.image);
+    product.reviews = JSON.parse(product.reviews);
 
     return res.send({ success: true, product });
   } catch (e) {
