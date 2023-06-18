@@ -22,9 +22,9 @@ const crypto = require("crypto");
 async function getCategories(req, res) {
   try {
     if (
-      !req.body.start ||
-      !req.body.limit ||
-      (!req.body.start && !req.body.limit)
+      req.body.start === undefined ||
+      req.body.limit === undefined ||
+      (req.body.start === undefined && req.body.limit === undefined)
     ) {
       req.body.start = 0;
       req.body.limit = 24;

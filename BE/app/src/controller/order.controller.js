@@ -12,11 +12,13 @@ async function getOrders(req, res) {
         code: "SESSIONEXPIRED",
       });
 
-    if (!req.body.start) {
+    if (
+      req.body.start === undefined ||
+      req.body.limit === undefined ||
+      (req.body.start === undefined && req.body.limit === undefined)
+    ) {
       req.body.start = 0;
-    }
-    if (!req.body.limit) {
-      req.body.limit = 25;
+      req.body.limit = 24;
     }
 
     const searchingOptions = {
@@ -46,11 +48,13 @@ async function getOrdersFModerators(req, res) {
         code: "SESSIONEXPIRED",
       });
 
-    if (!req.body.start) {
+    if (
+      req.body.start === undefined ||
+      req.body.limit === undefined ||
+      (req.body.start === undefined && req.body.limit === undefined)
+    ) {
       req.body.start = 0;
-    }
-    if (!req.body.limit) {
-      req.body.limit = 25;
+      req.body.limit = 24;
     }
 
     const searchingOptions = {
