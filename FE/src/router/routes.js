@@ -14,6 +14,13 @@ const routes = [
         },
       },
       {
+        name: "product",
+        path: "/product",
+        component: () => {
+          return import("src/pages/ProductPage.vue");
+        },
+      },
+      {
         name: "profile",
         path: "profile",
         component: () => {

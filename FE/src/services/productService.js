@@ -16,8 +16,14 @@ export async function getProduct({
     ...(!!categoryId && { category_id: categoryId }),
     ...(!!rating && { rating }),
     ...(!!name && { name }),
-    ...(!!priceMin && { price_min: priceMin }),
-    ...(!!priceMax && { price_max: priceMax }),
+    ...(!!priceMin && { price_min: priceMin.toString() }),
+    ...(!!priceMax && { price_max: priceMax.toString() }),
+  });
+  return convertObjectToCamelCase(response.data);
+}
+export async function getProductDetails(productId) {
+  const response = await api.post("product/get-product", {
+    product_id: productId,
   });
   return convertObjectToCamelCase(response.data);
 }
