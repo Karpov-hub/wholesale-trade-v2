@@ -166,6 +166,9 @@ async function updateUser(req, res) {
       });
     let updatingOptions = { ...req.body };
     updatingOptions.mtime = Date.now();
+    updatingOptions.delivery_address = JSON.stringify(
+      req.body.delivery_address
+    );
     await db.user.update(updatingOptions, {
       where: {
         id: user_id,
@@ -187,11 +190,11 @@ async function updateUserPassword(req, res) {
   try {
     let id = await redis.get(req.body.session_token);
 
-    let notifications = await createNotification({
-      user_id: id,
-      name: "Update Password",
-      description: "Your account password has been changed",
-    });
+    // let notifications = await createNotification({
+    //   user_id: id,
+    //   name: "Update Password",
+    //   description: "Your account password has been changed",
+    // });
 
     await db.user.update(
       {

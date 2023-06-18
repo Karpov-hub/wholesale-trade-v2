@@ -225,7 +225,7 @@ module.exports = {
           last_name: { type: "string" },
           middle_name: { type: "string" },
           phone: { type: "string" },
-          delivery_address: { type: "string" },
+          delivery_address: { type: "array" },
         },
         required: [
           "session_token",
