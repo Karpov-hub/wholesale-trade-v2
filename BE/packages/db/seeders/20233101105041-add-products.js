@@ -11,7 +11,7 @@ module.exports = {
         price: 19.99,
         discount: 10,
         reviews: "[]",
-        rating: 0,
+        rating: 1,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5229821/img_id8302462665572822144.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/1600461/img_id4462310261183614724.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/1715213/img_id8973522221964094450.jpeg/orig"]',
@@ -26,7 +26,7 @@ module.exports = {
         price: 39.99,
         discount: 0,
         reviews: "[]",
-        rating: 0,
+        rating: 2,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/1657306/img_id4369886166336434266.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/397397/img_id624619066672663048.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/5277894/img_id3341043331023890613.jpeg/orig"]',
@@ -41,7 +41,7 @@ module.exports = {
         price: 29.99,
         discount: 0,
         reviews: "[]",
-        rating: 0,
+        rating: 3,
         product_quantity: 20,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5236357/img_id5269347083674659525.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/4525599/img_id1544092232093431773.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/6217624/img_id498186410093735293.jpeg/orig"]',
@@ -56,8 +56,8 @@ module.exports = {
         price: 9.99,
         discount: 20,
         reviews:
-          '[{"id_user": "56b0a793-5f18-45a2-84da-93893d5b67e1", "value": 10, "comment": "Красивый браслет!"}]',
-        rating: 5,
+          '[{"id_user": "56b0a793-5f18-45a2-84da-93893d5b67e1", "value": 1, "comment": "Красивый браслет!"}]',
+        rating: 4,
         product_quantity: 100,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/1657306/img_id4877882716342364488.jpeg/orig"]',
@@ -72,7 +72,7 @@ module.exports = {
         price: 499.99,
         discount: 0,
         reviews: "[]",
-        rating: 0,
+        rating: 5,
         product_quantity: 10,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/1360852/img_id4375403627533141778.jpeg/orig ","https://avatars.mds.yandex.net/get-mpic/1360852/img_id4375403627533141778.jpeg/orig"]',
@@ -87,8 +87,8 @@ module.exports = {
         price: 89.99,
         discount: 15,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 2, "comment": "Отличное качество звука!"}]',
+        rating: 1,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/1521939/img_id8586595032896634827.png/orig","https://avatars.mds.yandex.net/get-mpic/1521939/img_id8586595032896634827.png/orig","https://avatars.mds.yandex.net/get-mpic/5363183/img_id7275655776283567455.png/orig"]',
@@ -103,8 +103,8 @@ module.exports = {
         price: 39.99,
         discount: 0,
         reviews:
-          '[{"id_user": "27a1cb5d-85e7-4ed9-8de2-06af25c5d1c3", "value": 7, "comment": "Красивая и функциональная лампа!"}]',
-        rating: 4,
+          '[{"id_user": "27a1cb5d-85e7-4ed9-8de2-06af25c5d1c3", "value": 3, "comment": "Красивая и функциональная лампа!"}]',
+        rating: 2,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5236458/img_id7696284497889154295.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/5235101/img_id5727203680515727449.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/4262452/img_id7109083386218920187.jpeg/orig"]',
@@ -119,8 +119,8 @@ module.exports = {
         price: 19.99,
         discount: 10,
         reviews:
-          '[{"id_user": "a4fcb07f-bf68-4f67-b964-1b739e2e532e", "value": 8, "comment": "Мягкая и комфортная подушка!"}]',
-        rating: 4,
+          '[{"id_user": "a4fcb07f-bf68-4f67-b964-1b739e2e532e", "value": 4, "comment": "Мягкая и комфортная подушка!"}]',
+        rating: 3,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/7689172/img_id4887499663854003347.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/7689172/img_id4887499663854003347.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/7665750/img_id6284016632551063873.jpeg/orig"]',
@@ -135,8 +135,8 @@ module.exports = {
         price: 19.99,
         discount: 0,
         reviews:
-          '[{"id_user": "cbbef768-1f8b-4ed3-9ea0-1fc422999824", "value": 9, "comment": "Отличный мяч для игры!"}]',
-        rating: 5,
+          '[{"id_user": "cbbef768-1f8b-4ed3-9ea0-1fc422999824", "value": 5, "comment": "Отличный мяч для игры!"}]',
+        rating: 4,
         product_quantity: 20,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5234464/img_id2926439145018036419.jpeg/orig","https://avatars.mds.yandex.net/get-mpic/364668/img_id5211051532172715282.jpeg/orig"]',
@@ -151,7 +151,7 @@ module.exports = {
         price: 29.99,
         discount: 0,
         reviews: "[]",
-        rating: 0,
+        rating: 5,
         product_quantity: 10,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5312993/img_id683095104744541357.jpeg/orig  ","https://avatars.mds.yandex.net/get-mpic/5251502/img_id1446586909386171192.png/orig","https://avatars.mds.yandex.net/get-mpic/4902598/img_id1870390132649744710.jpeg/orig"]',
@@ -167,7 +167,7 @@ module.exports = {
         price: 8990,
         discount: 0,
         reviews: "[]",
-        rating: 4,
+        rating: 1,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/7473874/img_id7128049712297677443.jpeg/orig"]',
@@ -181,7 +181,7 @@ module.exports = {
         price: 2990,
         discount: 20,
         reviews: "[]",
-        rating: 4,
+        rating: 2,
         product_quantity: 20,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5284145/img_id9069686074374442797.jpeg/orig"]',
@@ -196,13 +196,12 @@ module.exports = {
         price: 21990,
         discount: 15,
         reviews: "[]",
-        rating: 4,
+        rating: 3,
         product_quantity: 10,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5239537/img_id5247125343850062423.jpeg/orig"]',
         description: "Универсальный велосипед для активного отдыха и спорта.",
       },
-
       {
         id: "c579b99a-2b25-4c94-9a2c-7ad91ad8d5e0",
         name: "Ноутбук Dell XPS 13",
@@ -211,7 +210,7 @@ module.exports = {
         price: 84990,
         discount: 10,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 1, "comment": "Отличное качество звука!"}]',
         rating: 4,
         product_quantity: 50,
         image:
@@ -227,8 +226,8 @@ module.exports = {
         price: 79990,
         discount: 20,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 2, "comment": "Отличное качество звука!"}]',
+        rating: 5,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/4606255/img_id6731304619691134514.jpeg/orig"]',
@@ -243,8 +242,8 @@ module.exports = {
         price: 24990,
         discount: 15,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 3, "comment": "Отличное качество звука!"}]',
+        rating: 1,
         product_quantity: 40,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/4386141/img_id3192445659604357803.jpeg/orig"]',
@@ -259,8 +258,8 @@ module.exports = {
         price: 69990,
         discount: 5,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 4, "comment": "Отличное качество звука!"}]',
+        rating: 2,
         product_quantity: 100,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5233681/img_id6187862100290802397.jpeg/orig"]',
@@ -275,8 +274,8 @@ module.exports = {
         price: 129990,
         discount: 0,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 5, "comment": "Отличное качество звука!"}]',
+        rating: 3,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5242361/img_id2420073412246465223.jpeg/orig"]',
@@ -306,8 +305,8 @@ module.exports = {
         price: 2499,
         discount: 0,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 1, "comment": "Отличное качество звука!"}]',
+        rating: 5,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5279750/img_id7422563259148097831.jpeg/orig"]',
@@ -322,7 +321,7 @@ module.exports = {
         price: 1999,
         discount: 0,
         reviews: "[]",
-        rating: 4,
+        rating: 1,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-marketpic/6099605/picde65eea30f194428588091ef3ff774e3/orig"]',
@@ -337,7 +336,7 @@ module.exports = {
         price: 499,
         discount: 15,
         reviews: "[]",
-        rating: 4,
+        rating: 2,
         product_quantity: 100,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/4984138/img_id8389734805929468919.jpeg/orig"]',
@@ -352,8 +351,8 @@ module.exports = {
         price: 2490,
         discount: 10,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 2, "comment": "Отличное качество звука!"}]',
+        rating: 3,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/4080967/img_id8128133420125143221.jpeg/orig"]',
@@ -383,8 +382,8 @@ module.exports = {
         price: 9999,
         discount: 10,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 3, "comment": "Отличное качество звука!"}]',
+        rating: 5,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5233681/img_id6187862100290802397.jpeg/orig"]',
@@ -399,8 +398,8 @@ module.exports = {
         price: 129999,
         discount: 0,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 4, "comment": "Отличное качество звука!"}]',
+        rating: 1,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5242361/img_id2420073412246465223.jpeg/orig"]',
@@ -415,8 +414,8 @@ module.exports = {
         price: 9999,
         discount: 15,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 5, "comment": "Отличное качество звука!"}]',
+        rating: 2,
         product_quantity: 20,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/4250892/img_id3331157167952808236.jpeg/orig"]',
@@ -431,8 +430,8 @@ module.exports = {
         price: 2499,
         discount: 20,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 1, "comment": "Отличное качество звука!"}]',
+        rating: 3,
         product_quantity: 100,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5345452/img_id6879468432363438497.jpeg/orig"]',
@@ -462,8 +461,8 @@ module.exports = {
         price: 599,
         discount: 10,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 2, "comment": "Отличное качество звука!"}]',
+        rating: 5,
         product_quantity: 50,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5312993/img_id683095104744541357.jpeg/orig",]',
@@ -478,7 +477,7 @@ module.exports = {
         price: 1999,
         discount: 0,
         reviews: "[]",
-        rating: 4,
+        rating: 1,
         product_quantity: 30,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5391389/img_id1002833500338952495.png/orig"]',
@@ -493,8 +492,8 @@ module.exports = {
         price: 4499,
         discount: 5,
         reviews:
-          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 9, "comment": "Отличное качество звука!"}]',
-        rating: 4,
+          '[{"id_user": "9cfa5aa3-168b-4d25-bb01-8ea44a593eb7", "value": 3, "comment": "Отличное качество звука!"}]',
+        rating: 2,
         product_quantity: 10,
         image:
           '["https://avatars.mds.yandex.net/get-mpic/5068955/img_id6047884633257749435.jpeg/orig"]',
