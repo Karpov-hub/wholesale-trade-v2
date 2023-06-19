@@ -271,15 +271,6 @@ async function getProductFavoriteList(req, res) {
     for (let i = 0; i < favorites.length; i++) {
       let product = await db.product.findOne({
         where: { id: favorites[i] },
-        attributes: [
-          "id",
-          "name",
-          "image",
-          "price",
-          "discount",
-          "rating",
-          "product_quantity",
-        ],
       });
 
       products.push(product);
@@ -435,15 +426,6 @@ async function getProductShoppingCartList(req, res) {
     for (let i = 0; i < shoppingCartList.length; i++) {
       let product = await db.product.findOne({
         where: { id: shoppingCartList[i].id },
-        attributes: [
-          "id",
-          "name",
-          "image",
-          "price",
-          "discount",
-          "rating",
-          "product_quantity",
-        ],
       });
       product.product_quantity = shoppingCartList[i].quantity;
       products.push(product);
@@ -531,7 +513,6 @@ async function deleteProductShoppingCart(req, res) {
     let shoppingCartList = JSON.parse(user.shopping_cart);
 
     for (let i = 0; i < shoppingCartList.length; i++) {
-      console.log(shoppingCartList[i]);
       if (shoppingCartList[i].id == req.body.id_prod) {
         shoppingCartList.splice(i, 1);
         break;

@@ -342,6 +342,13 @@ module.exports = {
     },
   },
   group: {
+    get: {
+      type: "object",
+      properties: {
+        session_token: { type: "string" },
+      },
+      required: ["session_token"],
+    },
     create: {
       type: "object",
       properties: {
@@ -511,59 +518,65 @@ module.exports = {
         },
       },
     },
-    favorite: {
+    favoriteG: {
       "get-product-favorite": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           start: { type: "integer" },
           limit: { type: "integer" },
         },
-        required: ["session_token"],
+        required: ["session_token", "group_id"],
       },
       "add-product-favorite": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           id_prod: { type: "string" },
         },
-        required: ["session_token", "id_prod"],
+        required: ["session_token", "id_prod", "group_id"],
       },
       "delete-product-favorite": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           id_prod: { type: "string" },
         },
-        required: ["session_token", "id_prod"],
+        required: ["session_token", "id_prod", "group_id"],
       },
     },
-    shoppingCart: {
+    shoppingCartG: {
       "get-product-shoppingCart": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           start: { type: "integer" },
           limit: { type: "integer" },
         },
-        required: ["session_token"],
+        required: ["session_token", "group_id"],
       },
       "add-product-shoppingCart": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           id_prod: { type: "string" },
           quantity: { type: "integer" },
         },
-        required: ["session_token", "id_prod", "quantity"],
+        required: ["session_token", "id_prod", "quantity", "group_id"],
       },
       "delete-product-shoppingCart": {
         type: "object",
         properties: {
           session_token: { type: "string" },
+          group_id: { type: "string" },
           id_prod: { type: "string" },
         },
-        required: ["session_token", "id_prod"],
+        required: ["session_token", "id_prod", "group_id"],
       },
     },
   },

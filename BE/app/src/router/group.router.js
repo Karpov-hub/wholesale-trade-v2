@@ -1,6 +1,7 @@
 const router = require("./main.router");
 const controller = require("../controller/group.controller");
 
+router.post("/get", controller.getGroup);
 router.post("/create", controller.createGroup);
 router.post("/delete", controller.deleteGroup);
 router.post("/get-info", controller.getGroupInfo);
@@ -26,29 +27,29 @@ router.post("/chats/messages/update", controller.updateMessages);
 router.post("/chats/messages/search", controller.searchMessages);
 router.post("/chats/messages/share-product", controller.shareProduct);
 
-// //Избранное
-// router.post(
-//   "/favorite/get-product-favorite",
-//   controller.getProductFavoriteList
-// );
-// router.post("/favorite/add-product-favorite", controller.addProductFavorite);
-// router.post(
-//   "/favorite/delete-product-favorite",
-//   controller.deleteProductFavorite
-// );
+//Избранное
+router.post(
+  "/favoriteG/get-product-favorite",
+  controller.getProductFavoriteListG
+);
+router.post("/favoriteG/add-product-favorite", controller.addProductFavoriteG);
+router.post(
+  "/favoriteG/delete-product-favorite",
+  controller.deleteProductFavoriteG
+);
 
-// //Корзина
-// router.post(
-//   "/shoppingCart/get-product-shoppingCart",
-//   controller.getProductShoppingCartList
-// );
-// router.post(
-//   "/shoppingCart/add-product-shoppingCart",
-//   controller.addProductShoppingCart
-// );
-// router.post(
-//   "/shoppingCart/delete-product-shoppingCart",
-//   controller.deleteProductShoppingCart
-// );
+//Корзина
+router.post(
+  "/shoppingCartG/get-product-shoppingCart",
+  controller.getProductShoppingCartListG
+);
+router.post(
+  "/shoppingCartG/add-product-shoppingCart",
+  controller.addProductShoppingCartG
+);
+router.post(
+  "/shoppingCartG/delete-product-shoppingCart",
+  controller.deleteProductShoppingCartG
+);
 
 module.exports = router;

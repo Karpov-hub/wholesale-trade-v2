@@ -16,12 +16,12 @@ module.exports = {
           name: "groups1",
           description: "products",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "c2f1a566-0b7e-4df5-b688-46b34a8b4e24", "quantity": 15}, {"id": "8eb1a4d2-6ad4-4b2a-a3e2-9a20b4fc82d3", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["2cc5127b-b5e1-4b7e-9b57-44a3660ddc2b", "e9a1e3b0-7922-4dbb-88fe-6a1ed0fe7dce"]',
           admin_id: "44b75e7f-07c0-43be-aa93-757f771bbd45",
           users:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["c556d6a1-6a95-4b44-8e6d-1fe8f376d61f", "8f2efca9-bbe7-4f09-8b47-b24d240145c0"]',
         },
       ]);
 
@@ -39,9 +39,9 @@ module.exports = {
           name: "groups2",
           description: "flowers",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "2cc5127b-b5e1-4b7e-9b57-44a3660ddc2b, "quantity": 15}, {"id": "e9a1e3b0-7922-4dbb-88fe-6a1ed0fe7dce", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["18c351cd-6d34-4d66-8a8c-aa3af94c449e", "05a6c381-5eaf-4139-9f1f-14167a78c35b"]',
           admin_id: "99313318-d59d-4e1f-b218-3c81d2a01395",
         },
       ]);

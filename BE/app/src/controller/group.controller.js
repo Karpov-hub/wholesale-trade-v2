@@ -3,6 +3,34 @@ const crypto = require("crypto");
 const config = require("@app/config");
 const redis = require("@app/redis");
 const { v4: uuidv4 } = require("uuid");
+
+async function getGroup(req, res) {
+  try {
+    const sessionToken = req.body.session_token;
+    const userId = await redis.get(sessionToken);
+
+    if (!userId) {
+      return res.send({
+        code: "SESSIONEXPIRED",
+      });
+    }
+
+    const groups = await db.group.findAll({
+      where: { admin_id: userId },
+    });
+
+    return res.send({
+      success: true,
+      groups: groups,
+    });
+  } catch (error) {
+    console.error("Error creating group:", error);
+    return res.status(500).send({
+      code: "ERROR",
+      message: "An error occurred while creating the group",
+    });
+  }
+}
 async function createGroup(req, res) {
   try {
     const sessionToken = req.body.session_token;
@@ -50,7 +78,6 @@ async function createGroup(req, res) {
     });
   }
 }
-
 async function deleteGroup(req, res) {
   try {
     const { group_id, session_token } = req.body;
@@ -96,7 +123,6 @@ async function deleteGroup(req, res) {
     });
   }
 }
-
 async function getGroupInfo(req, res) {
   try {
     const { group_id, session_token } = req.body;
@@ -110,6 +136,7 @@ async function getGroupInfo(req, res) {
     const group = await db.group.findOne({
       where: { id: group_id },
     });
+
     if (!group) {
       return res.send({
         code: "GROUPNOTFOUND",
@@ -118,20 +145,14 @@ async function getGroupInfo(req, res) {
     }
 
     const users = JSON.parse(group.users);
-    let accessDenied = true;
 
-    for (let i = 0; i < users.length; i++) {
-      if (user_id === users[i]) {
-        access = false;
-        break;
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        if (user_id === users[i]) {
+          access = false;
+          break;
+        }
       }
-    }
-
-    if (accessDenied) {
-      return res.send({
-        code: "ACCESSDENIED",
-        message: "Access denied : you are not a member of this group.",
-      });
     }
 
     // Формирование объекта с информацией о группе
@@ -155,7 +176,6 @@ async function getGroupInfo(req, res) {
     });
   }
 }
-
 async function updateGroupData(req, res) {
   try {
     const { group_id, name, description, session_token } = req.body;
@@ -827,277 +847,273 @@ async function shareProduct(req, res) {
   }
 }
 
-// //Избранное
-// async function getProductFavoriteList(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+//Избранное
+async function getProductFavoriteListG(req, res) {
+  try {
+    const { group_id, session_token } = req.body;
+    // let user_id = await redis.get(session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
+    if (!req.body.start) {
+      req.body.start = 0;
+    }
+    if (!req.body.limit) {
+      req.body.limit = 25;
+    }
 
-//     if (!req.body.start) {
-//       req.body.start = 0;
-//     }
-//     if (!req.body.limit) {
-//       req.body.limit = 25;
-//     }
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["favorites"],
+    });
+    let favorites = JSON.parse(group.favorites).slice(
+      req.body.start,
+      req.body.limit
+    );
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["favorites"],
-//     });
-//     let favorites = JSON.parse(user.favorites).slice(
-//       req.body.start,
-//       req.body.limit
-//     );
-//     let products = [];
-//     for (let i = 0; i < favorites.length; i++) {
-//       let product = await db.product.findOne({
-//         where: { id: favorites[i] },
-//         attributes: [
-//           "id",
-//           "name",
-//           "image",
-//           "price",
-//           "discount",
-//           "rating",
-//           "product_quantity",
-//         ],
-//       });
+    let products = [];
+    for (let i = 0; i < favorites.length; i++) {
+      let product = await db.product.findOne({
+        where: { id: favorites[i] },
+      });
+      products.push(product);
+    }
+    return res.send({
+      success: true,
+      rows: products,
+      count: JSON.parse(group.favorites).length,
+    });
+  } catch (e) {
+    return res.send({
+      success: false,
+      message: "Error when trying to get a list",
+    });
+  }
+}
 
-//       products.push(product);
-//     }
-//     return res.send({
-//       success: true,
-//       rows: products,
-//       count: JSON.parse(user.favorites).length,
-//     });
-//   } catch (e) {
-//     return res.send({
-//       success: false,
-//       message: "Error when trying to get a list",
-//     });
-//   }
-// }
+async function addProductFavoriteG(req, res) {
+  try {
+    const { group_id, id_prod, session_token } = req.body;
+    // let user_id = await redis.get(req.body.session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
 
-// async function addProductFavorite(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["favorites"],
+    });
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["favorites"],
-//     });
+    let favoriteList = JSON.parse(group.favorites);
+    favoriteList.push(id_prod);
+    favoriteList = JSON.stringify(favoriteList);
 
-//     let favoriteList = JSON.parse(user.favorites);
-//     favoriteList.push(req.body.id_prod);
-//     favoriteList = JSON.stringify(favoriteList);
+    await db.group.update(
+      {
+        favorites: favoriteList,
+      },
+      {
+        where: {
+          id: group_id,
+        },
+      }
+    );
+    return res.send({ success: true });
+  } catch (e) {
+    return res.send({ success: false });
+  }
+}
 
-//     await db.user.update(
-//       {
-//         favorites: favoriteList,
-//       },
-//       {
-//         where: {
-//           id: user_id,
-//         },
-//       }
-//     );
-//     return res.send({ success: true });
-//   } catch (e) {
-//     return res.send({ success: false });
-//   }
-// }
+async function deleteProductFavoriteG(req, res) {
+  try {
+    const { group_id, id_prod, session_token } = req.body;
+    // let user_id = await redis.get(req.body.session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
 
-// async function deleteProductFavorite(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["favorites"],
+    });
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["favorites"],
-//     });
+    let favoriteList = JSON.parse(group.favorites);
 
-//     let favoriteList = JSON.parse(user.favorites);
+    for (let i = 0; i < favoriteList.length; i++) {
+      if (favoriteList[i] == id_prod) {
+        favoriteList.splice(i, 1);
+        break;
+      }
+    }
+    favoriteList = JSON.stringify(favoriteList);
 
-//     for (let i = 0; i < favoriteList.length; i++) {
-//       if (favoriteList[i] == req.body.id_prod) {
-//         favoriteList.splice(i, 1);
-//         break;
-//       }
-//     }
-//     favoriteList = JSON.stringify(favoriteList);
+    await db.group.update(
+      {
+        favorites: favoriteList,
+      },
+      {
+        where: {
+          id: group_id,
+        },
+      }
+    );
+    return res.send({ success: true });
+  } catch (e) {
+    return res.send({ success: false });
+  }
+}
 
-//     await db.user.update(
-//       {
-//         favorites: favoriteList,
-//       },
-//       {
-//         where: {
-//           id: user_id,
-//         },
-//       }
-//     );
-//     return res.send({ success: true });
-//   } catch (e) {
-//     return res.send({ success: false });
-//   }
-// }
+//Корзина
+async function getProductShoppingCartListG(req, res) {
+  try {
+    const { group_id, session_token } = req.body;
 
-// //Корзина
-// async function getProductShoppingCartList(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+    // let user_id = await redis.get(session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
 
-//     if (!req.body.start) {
-//       req.body.start = 0;
-//     }
-//     if (!req.body.limit) {
-//       req.body.limit = 25;
-//     }
+    if (!req.body.start) {
+      req.body.start = 0;
+    }
+    if (!req.body.limit) {
+      req.body.limit = 25;
+    }
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["shopping_cart"],
-//     });
-//     let shoppingCartList = JSON.parse(user.shopping_cart);
-//     let products = [];
-//     let totalCost = 0; // Переменная для хранения итоговой стоимости
-//     for (let i = 0; i < shoppingCartList.length; i++) {
-//       let product = await db.product.findOne({
-//         where: { id: shoppingCartList[i].id },
-//         attributes: [
-//           "id",
-//           "name",
-//           "image",
-//           "price",
-//           "discount",
-//           "rating",
-//           "product_quantity",
-//         ],
-//       });
-//       product.product_quantity = shoppingCartList[i].quantity;
-//       products.push(product);
-//       // Расчет стоимости товара с учетом количества в корзине
-//       let itemCost = product.price * shoppingCartList[i].quantity;
-//       totalCost += itemCost;
-//     }
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["shopping_cart"],
+    });
+    let shoppingCartList = JSON.parse(group.shopping_cart);
+    let products = [];
+    let totalCost = 0; // Переменная для хранения итоговой стоимости
+    for (let i = 0; i < shoppingCartList.length; i++) {
+      let product = await db.product.findOne({
+        where: { id: shoppingCartList[i].id },
+        attributes: [
+          "id",
+          "name",
+          "image",
+          "price",
+          "discount",
+          "rating",
+          "product_quantity",
+        ],
+      });
+      product.product_quantity = shoppingCartList[i].quantity;
+      products.push(product);
+      // Расчет стоимости товара с учетом количества в корзине
+      let itemCost = product.price * shoppingCartList[i].quantity;
+      totalCost += itemCost;
+    }
 
-//     return res.send({
-//       success: true,
-//       rows: products.slice(req.body.start, req.body.limit),
-//       count: JSON.parse(user.shopping_cart).length,
-//       total_price: totalCost, // Добавляем итоговую стоимость в ответ
-//     });
-//   } catch (e) {
-//     return res.send({
-//       success: false,
-//       message: "Error when trying to get a list",
-//     });
-//   }
-// }
+    return res.send({
+      success: true,
+      rows: products.slice(req.body.start, req.body.limit),
+      count: JSON.parse(group.shopping_cart).length,
+      total_price: totalCost, // Добавляем итоговую стоимость в ответ
+    });
+  } catch (e) {
+    return res.send({
+      success: false,
+      message: "Error when trying to get a list",
+    });
+  }
+}
 
-// async function addProductShoppingCart(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+async function addProductShoppingCartG(req, res) {
+  try {
+    const { group_id, id_prod, quantity, session_token } = req.body;
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["shopping_cart"],
-//     });
+    // let user_id = await redis.get(req.body.session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
 
-//     let shoppingCartList = JSON.parse(user.shopping_cart);
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["shopping_cart"],
+    });
 
-//     // Проверяем, есть ли уже объект с указанным id в корзине
-//     let existingProduct = shoppingCartList.find(
-//       (item) => item.id === req.body.id_prod
-//     );
+    let shoppingCartList = JSON.parse(group.shopping_cart);
 
-//     if (existingProduct) {
-//       // Объект уже существует, увеличиваем его quantity на указанное значение
-//       existingProduct.quantity += req.body.quantity;
-//     } else {
-//       // Объект не существует, добавляем новый элемент в корзину
-//       shoppingCartList.push({
-//         id: req.body.id_prod,
-//         quantity: req.body.quantity,
-//       });
-//     }
+    // Проверяем, есть ли уже объект с указанным id в корзине
+    let existingProduct = shoppingCartList.find((item) => item.id === id_prod);
 
-//     shoppingCartList = JSON.stringify(shoppingCartList);
+    if (existingProduct) {
+      // Объект уже существует, увеличиваем его quantity на указанное значение
+      existingProduct.quantity += quantity;
+    } else {
+      // Объект не существует, добавляем новый элемент в корзину
+      shoppingCartList.push({
+        id: id_prod,
+        quantity: quantity,
+      });
+    }
 
-//     await db.user.update(
-//       {
-//         shopping_cart: shoppingCartList,
-//       },
-//       {
-//         where: {
-//           id: user_id,
-//         },
-//       }
-//     );
-//     return res.send({ success: true });
-//   } catch (e) {
-//     return res.send({ success: false });
-//   }
-// }
+    shoppingCartList = JSON.stringify(shoppingCartList);
 
-// async function deleteProductShoppingCart(req, res) {
-//   try {
-//     let user_id = await redis.get(req.body.session_token);
-//     if (!user_id)
-//       return res.send({
-//         code: "SESSIONEXPIRED",
-//       });
+    await db.group.update(
+      {
+        shopping_cart: shoppingCartList,
+      },
+      {
+        where: {
+          id: group_id,
+        },
+      }
+    );
+    return res.send({ success: true });
+  } catch (e) {
+    return res.send({ success: false });
+  }
+}
 
-//     let user = await db.user.findOne({
-//       where: { id: user_id },
-//       attributes: ["shopping_cart"],
-//     });
+async function deleteProductShoppingCartG(req, res) {
+  try {
+    const { group_id, id_prod, session_token } = req.body;
 
-//     let shoppingCartList = JSON.parse(user.shopping_cart);
+    // let user_id = await redis.get(req.body.session_token);
+    // if (!user_id)
+    //   return res.send({
+    //     code: "SESSIONEXPIRED",
+    //   });
 
-//     for (let i = 0; i < shoppingCartList.length; i++) {
-//       console.log(shoppingCartList[i]);
-//       if (shoppingCartList[i].id == req.body.id_prod) {
-//         shoppingCartList.splice(i, 1);
-//         break;
-//       }
-//     }
-//     shoppingCartList = JSON.stringify(shoppingCartList);
+    let group = await db.group.findOne({
+      where: { id: group_id },
+      attributes: ["shopping_cart"],
+    });
 
-//     await db.user.update(
-//       {
-//         shopping_cart: shoppingCartList,
-//       },
-//       {
-//         where: {
-//           id: user_id,
-//         },
-//       }
-//     );
-//     return res.send({ success: true });
-//   } catch (e) {
-//     return res.send({ success: false });
-//   }
-// }
+    let shoppingCartList = JSON.parse(group.shopping_cart);
+
+    for (let i = 0; i < shoppingCartList.length; i++) {
+      if (shoppingCartList[i].id == id_prod) {
+        shoppingCartList.splice(i, 1);
+        break;
+      }
+    }
+    shoppingCartList = JSON.stringify(shoppingCartList);
+
+    await db.group.update(
+      {
+        shopping_cart: shoppingCartList,
+      },
+      {
+        where: {
+          id: group_id,
+        },
+      }
+    );
+    return res.send({ success: true });
+  } catch (e) {
+    return res.send({ success: false });
+  }
+}
 
 //проверка прав доступа участника
 async function checkGroupMembership(session_token, group_id) {
@@ -1143,6 +1159,7 @@ async function checkAdminAccess(session_token, group_id) {
 }
 
 module.exports = {
+  getGroup,
   createGroup,
   deleteGroup,
   getGroupInfo,
@@ -1165,11 +1182,11 @@ module.exports = {
   searchMessages,
   shareProduct,
   // //Избранное
-  // getProductFavoriteList,
-  // addProductFavorite,
-  // deleteProductFavorite,
-  // //Корзина
-  // getProductShoppingCartList,
-  // addProductShoppingCart,
-  // deleteProductShoppingCart,
+  getProductFavoriteListG,
+  addProductFavoriteG,
+  deleteProductFavoriteG,
+  //Корзина
+  getProductShoppingCartListG,
+  addProductShoppingCartG,
+  deleteProductShoppingCartG,
 };

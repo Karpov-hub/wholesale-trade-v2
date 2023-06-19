@@ -18,9 +18,9 @@ module.exports = {
           last_name: "Karpov",
           middle_name: "Andreevich",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -45,10 +45,10 @@ module.exports = {
           last_name: "Cherednichenko",
           middle_name: "Nikolavna",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
-          phone: "8-909-385-35-23",
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
+          phone: "8-909-385-35-29",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications:
@@ -72,9 +72,9 @@ module.exports = {
           last_name: "Ivanova",
           middle_name: "Sergeevna",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -98,9 +98,9 @@ module.exports = {
           last_name: "Petrov",
           middle_name: "Andreevich",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -124,9 +124,9 @@ module.exports = {
           last_name: "Sidorova",
           middle_name: "Petrovna",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -150,9 +150,9 @@ module.exports = {
           last_name: "Fedorova",
           middle_name: "Ivanovna",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -176,9 +176,9 @@ module.exports = {
           last_name: "Ivanov",
           middle_name: "Petrovich",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
@@ -202,9 +202,9 @@ module.exports = {
           last_name: "Smirnova",
           middle_name: "Vladimirovna",
           shopping_cart:
-            '[{"id": "e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "quantity": 15}, {"id": "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5", "quantity": 15}]',
+            '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
-            '["e0990142-8a6c-4caf-b5f2-1a17ddf986c4", "ec36739b-d10c-4c1e-a72f-b2aee73fe6d5"]',
+            '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
           phone: "8-909-385-35-23",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
