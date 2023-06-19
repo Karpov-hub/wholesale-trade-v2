@@ -14,6 +14,13 @@ const routes = [
         },
       },
       {
+        name: "product",
+        path: "product",
+        component: () => {
+          return import("src/pages/ProductPage.vue");
+        },
+      },
+      {
         name: "profile",
         path: "profile",
         component: () => {
@@ -54,6 +61,22 @@ const routes = [
         path: "signup",
         component: () => {
           return import("src/pages/SignupPage.vue");
+        },
+      },
+    ],
+  },
+
+  {
+    path: "/connection-error",
+    component: () => {
+      return import("src/layouts/AuthLayout.vue");
+    },
+    children: [
+      {
+        name: "connectionError",
+        path: "",
+        component: () => {
+          return import("src/pages/ConnectionErrorPage.vue");
         },
       },
     ],

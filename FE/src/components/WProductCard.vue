@@ -1,7 +1,7 @@
 <template>
-  <w-card class="my-card" flat bordered>
+  <w-card>
     <q-card-section>
-      <router-link to="/">
+      <router-link :to="{ name: 'product', query: { id: modelValue.id } }">
         <q-img
           :ratio="3 / 4"
           :src="modelValue.image[0]"
@@ -17,7 +17,7 @@
           </template>
         </q-img>
       </router-link>
-      <div class="text-subtitle1 full-width">{{ `${modelValue.price} ₽` }}</div>
+      <div class="text-subtitle1 full-width">{{ `${modelValue.price} $` }}</div>
       <div class="text-medium q-mb-xs text-caption cutoff-text">
         {{ modelValue.name }}
       </div>
@@ -38,12 +38,14 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Object,
     required: true,
   },
 });
+
+console.log(props.modelValue);
 </script>
 
 <style lang="scss" scoped>
