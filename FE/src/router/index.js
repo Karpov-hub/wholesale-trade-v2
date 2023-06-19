@@ -40,19 +40,6 @@ export default route((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  // ✅ Fetches user profile from the server if founds session token
-  Router.beforeEach(async () => {
-    const userStore = useUserStore();
-
-    const sessionToken = localStorage.getItem("sessionToken");
-
-    if (sessionToken) {
-      await userStore.fetchUserProfile();
-    }
-
-    return true;
-  });
-
   // ❗️ Avoid redirecting to auth pages if user is already authenticated
   Router.beforeEach((to) => {
     const userStore = useUserStore();

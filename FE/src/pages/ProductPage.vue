@@ -29,51 +29,47 @@
             >
             </q-carousel-slide>
           </q-carousel>
-
-          <!-- <q-tab-panels
-            v-model="currentImageTab"
-            animated
-            swipeable
-            infinite
-            class="bordered rounded-borders"
-          >
-            <q-tab-panel
-              v-for="(image, index) in productDetails.images"
-              :key="index"
-              :name="index"
-              class="flex flex-center"
-            >
-
-            </q-tab-panel>
-          </q-tab-panels> -->
         </div>
 
         <!-- data -->
         <q-card-section class="col-xs-12 col-sm-6 column">
           <div
-            class="full-width bordered rounded-borders text-body1 text-weight-bold q-pa-sm"
+            class="full-width flex flex-nowrap bordered rounded-borders text-body1 text-weight-bold q-pa-sm"
           >
             <span class="q-mr-sm">
               {{ `${productDetails.price} $` }}
             </span>
-            <span class="text-grey-9 text-strike" style="font-size: 0.85em">
+            <span
+              v-if="productDetails.discount"
+              class="text-grey-9 text-strike"
+              style="font-size: 0.85em"
+            >
               {{ `${productWithoutDiscount} $` }}
             </span>
+            <span
+              v-if="productDetails.discount"
+              class="block q-ml-auto text-green"
+            >
+              {{ `${productDetails.discount}% Off!` }}
+            </span>
           </div>
-          <div class="text-weight-medium q-mt-sm text-h6 text-weight-medium">
+          <div class="text-weight-medium text-h6 text-weight-medium q-mt-sm">
             {{ productDetails.name }}
           </div>
 
-          <div class="row q-gutter-xs no-wrap overflow-x-scroll">
+          <!-- cards -->
+          <div class="row q-gutter-xs no-wrap overflow-x-scroll q-mt-sm">
+            <!-- quantity -->
             <div class="text-body2 bordered rounded-borders q-pa-xs col-auto">
               <div>
                 {{ `На складе: ${productDetails.productQuantity}` }}
               </div>
               <div class="text-grey-9">единиц товара</div>
             </div>
-
+            <!-- rating and reviews -->
             <div
               class="text-body2 bordered rounded-borders q-pa-xs col-auto cursor-pointer"
+              @click="scrollToReviewsSection()"
             >
               <div>
                 {{ `${productDetails.reviews.length} отзывов` }}
@@ -88,11 +84,80 @@
               </div>
             </div>
           </div>
+
+          <!-- cart & favorites & share -->
+          <div class="row q-mt-sm q-gutter-sm items-center">
+            <q-form class="flex">
+              <q-input
+                v-model="quantity"
+                class="quantity-input q-mr-xs"
+                dense
+                outlined
+                type="text"
+                label="Кол-во"
+              />
+
+              <q-btn
+                color="primary"
+                :icon="
+                  isInsideShoppingCard
+                    ? 'remove_shopping_cart'
+                    : 'shopping_cart'
+                "
+                :loading="isShoppingCartBtnLoading"
+                :label="isInsideShoppingCard ? 'Убрать' : 'В корзину'"
+                @click="
+                  isInsideShoppingCard
+                    ? removeFromShoppingCart()
+                    : addToShoppingCart()
+                "
+              />
+            </q-form>
+            <div>
+              <q-btn
+                round
+                outline
+                :color="isFavorite ? 'red' : 'black'"
+                icon="favorite"
+                size="0.85em"
+                @click="toggleFavorite()"
+              />
+            </div>
+          </div>
         </q-card-section>
 
         <!-- desc -->
-        <q-card-section class="col-xs-12 col-sm-12">
+        <q-card-section class="col-xs-12">
           {{ productDetails.description }}
+        </q-card-section>
+
+        <q-separator class="full-width" />
+
+        <!-- reviews section -->
+        <q-card-section id="reviewsSection" class="col-xs-12">
+          <q-infinite-scroll
+            :offset="250"
+            :disable="isReviewsScrollDisabled"
+            @load="onLoad"
+          >
+            <template #loading>
+              <div class="row justify-center q-my-md">
+                <q-spinner-dots color="primary" size="40px" />
+              </div>
+            </template>
+            <div class="text-h5 q-mb-sm">Отзывы</div>
+            <div v-if="reviewsToShow.length === 0">
+              Похоже на этот товар еще нет отзывов, будьте первыми! 😉
+            </div>
+            <template v-else>
+              <ProductReview
+                v-for="(review, index) in reviewsToShow"
+                :key="index"
+                class="caption"
+                :review="review"
+              />
+            </template>
+          </q-infinite-scroll>
         </q-card-section>
       </w-card>
     </div>
@@ -105,13 +170,78 @@
 import { getProductDetails } from "src/services/productService";
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
+import ProductReview from "src/views/ProductReview.vue";
+import { useFavoritesStore } from "src/stores/favoritesStore";
+import { useShoppingCartStore } from "src/stores/shoppingCartStore";
 
+const favoritesStore = useFavoritesStore();
+const shoppingCartStore = useShoppingCartStore();
+// eslint-disable-next-line
+// import { v4 as uuid } from "uuid";
+
+const reviewsToShow = ref([]);
+
+let reviews = [];
 const currentImageTab = ref(1);
 const route = useRoute();
 const productDetails = ref(null);
 const isProductDetailsLoading = ref(false);
-
 const carouselAutoplay = ref(true);
+
+// for (let i = 0; i < 100; i++) {
+//   const review = {
+//     id_user: uuid(),
+//     value: Math.floor(Math.random() * 10) + 1,
+//     comment: `Review ${i + 1}`,
+//   };
+//   reviews.push(review);
+// }
+
+const quantity = ref(1);
+
+const isFavorite = computed(() => {
+  return true;
+});
+
+const isInsideShoppingCard = computed(() => {
+  const productInsideCard = shoppingCartStore.shoppingCart.find((product) => {
+    return product.id === productDetails.value.id;
+  });
+
+  if (productInsideCard) {
+    return true;
+  }
+  return false;
+});
+
+const isShoppingCartBtnLoading = ref(false);
+
+const pagination = {
+  start: 0,
+  limit: 10,
+};
+
+const isReviewsScrollDisabled = computed(() => {
+  return reviewsToShow.value.length === reviews.length;
+});
+
+function loadMoreReviews() {
+  const reviewsToLoad = reviews.slice(
+    pagination.start,
+    pagination.start + pagination.limit
+  );
+
+  reviewsToShow.value.push(...reviewsToLoad);
+
+  pagination.start += pagination.limit;
+}
+
+function onLoad(index, done) {
+  setTimeout(() => {
+    loadMoreReviews();
+    done();
+  }, 100);
+}
 
 const productWithoutDiscount = computed(() => {
   return Math.ceil(
@@ -135,8 +265,47 @@ async function fetchProductDetails() {
       }),
     };
     delete productDetails.value.image;
+
+    reviews = response.product.reviews.map((review) => {
+      return {
+        ...review,
+        value: Math.ceil(review.value / 2),
+      };
+    });
+
+    loadMoreReviews();
+    await favoritesStore.fetchFavoriteProducts();
   } finally {
     isProductDetailsLoading.value = false;
+  }
+}
+
+function scrollToReviewsSection() {
+  document.getElementById("reviewsSection").scrollIntoView({
+    behavior: "smooth",
+  });
+}
+
+function toggleFavorite() {}
+async function addToShoppingCart() {
+  try {
+    isShoppingCartBtnLoading.value = true;
+    await shoppingCartStore.addToShoppingCart(
+      productDetails.value,
+      quantity.value
+    );
+    await shoppingCartStore.fetchShoppingCart();
+  } finally {
+    isShoppingCartBtnLoading.value = false;
+  }
+}
+async function removeFromShoppingCart() {
+  try {
+    isShoppingCartBtnLoading.value = true;
+    await shoppingCartStore.removeFromShoppingCart(productDetails.value.id);
+    await shoppingCartStore.fetchShoppingCart();
+  } finally {
+    isShoppingCartBtnLoading.value = false;
   }
 }
 
@@ -148,5 +317,9 @@ onMounted(() => {
 .carousel-image {
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.quantity-input {
+  width: 70px;
 }
 </style>

@@ -30,7 +30,9 @@
           color="primary"
         />
         <span class="text-caption text-grey">
-          {{ `${modelValue.rating} (${modelValue.reviews.length})` }}
+          {{
+            `${modelValue.rating} (${JSON.parse(modelValue.reviews).length})`
+          }}
         </span>
       </div>
     </q-card-section>
@@ -38,14 +40,12 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   modelValue: {
     type: Object,
     required: true,
   },
 });
-
-console.log(props.modelValue);
 </script>
 
 <style lang="scss" scoped>

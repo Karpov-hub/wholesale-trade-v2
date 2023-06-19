@@ -273,7 +273,6 @@ function saveEdit() {
 
   // Найдите индекс чата в массиве `chats` по его `id`
   const index = chats.value.findIndex((chat) => {
-    console.log(chat.id, editedChat.value.id);
     return chat.id === editedChat.value.id;
   });
   if (index !== -1) {

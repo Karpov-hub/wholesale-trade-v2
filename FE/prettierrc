@@ -18,6 +18,7 @@
   "trailingComma": "none",
   "useTabs": false,
   "vueIndentScriptAndStyle": true,
+  "prettier.htmlWhitespaceSensitivity": "ignore",
   "overrides": [
     {
       "files": ".prettierrc",
