@@ -47,19 +47,19 @@ api.interceptors.response.use(
       // const config = error?.config;  here we have access the config used to make the api call (we can make a retry using this conf)
 
       if (error.code === "ERR_NETWORK") {
-        console.log("network error");
+        // console.log("network error");
       } else if (error.code === "ERR_CANCELED") {
-        console.log("connection canceled..");
+        // console.log("connection canceled..");
       }
       if (response) {
         // The request was made and the server responded with a status code that falls out of the range of 2xx the http status code mentioned above
         const statusCode = response?.status;
         if (statusCode === 404) {
-          console.log(
-            "The requested resource does not exist or has been deleted"
-          );
+          // console.log(
+          //   "The requested resource does not exist or has been deleted"
+          // );
         } else if (statusCode === 401) {
-          console.log("Please login to access this resource");
+          // console.log("Please login to access this resource");
           // redirect user to login
         }
       } else if (request) {

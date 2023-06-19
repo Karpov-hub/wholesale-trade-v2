@@ -2,7 +2,7 @@ import { api } from "src/boot/axios";
 import { convertObjectToCamelCase } from "src/helpers/mapHelper";
 
 export async function getProductFavoriteList() {
-  const response = await api.post("user/favorite/get-product-favoriteList");
+  const response = await api.post("user/favorite/get-product-favorite");
   return convertObjectToCamelCase(response.data);
 }
 export async function addProductFavorite(productId) {

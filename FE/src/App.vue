@@ -62,10 +62,6 @@ emitter.on("login-state-changed", () => {
 
 onMounted(async () => {
   initializeApp();
-
-  // setTimeout(() => {
-  //   emitter.emit("login-state-changed");
-  // }, 5000);
 });
 
 // Remove the event listener when the component is destroyed

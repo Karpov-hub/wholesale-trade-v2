@@ -7,6 +7,7 @@
     bordered
     :mini="miniState"
     mini-to-overlay
+    width="310"
     @mouseover="miniState = false"
     @mouseout="miniState = true"
     @update:model-value="$emit('update:modelValue', $event)"
@@ -147,7 +148,7 @@ const menuList = computed(() => {
         separator: true,
       },
       events: {},
-      isShown: userStore.isAuthenticated,
+      isShown: true,
     },
     {
       props: {

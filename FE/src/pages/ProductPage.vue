@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="flex">
     <div v-if="productDetails && isProductDetailsLoading === false">
       <w-card class="row justify-center full-width">
         <!-- photos -->
@@ -117,10 +117,11 @@
               <q-btn
                 round
                 outline
+                :loading="isFavoritesBtnLoading"
                 :color="isFavorite ? 'red' : 'black'"
                 icon="favorite"
                 size="0.85em"
-                @click="toggleFavorite()"
+                @click="isFavorite ? removeFromFavorites() : addToFavorites()"
               />
             </div>
           </div>
@@ -161,7 +162,7 @@
         </q-card-section>
       </w-card>
     </div>
-    <div v-else class="flex flex-center">
+    <div v-else class="flex flex-center col-grow">
       <q-spinner-dots size="50px" color="primary" />
     </div>
   </q-page>
@@ -176,8 +177,6 @@ import { useShoppingCartStore } from "src/stores/shoppingCartStore";
 
 const favoritesStore = useFavoritesStore();
 const shoppingCartStore = useShoppingCartStore();
-// eslint-disable-next-line
-// import { v4 as uuid } from "uuid";
 
 const reviewsToShow = ref([]);
 
@@ -188,19 +187,17 @@ const productDetails = ref(null);
 const isProductDetailsLoading = ref(false);
 const carouselAutoplay = ref(true);
 
-// for (let i = 0; i < 100; i++) {
-//   const review = {
-//     id_user: uuid(),
-//     value: Math.floor(Math.random() * 10) + 1,
-//     comment: `Review ${i + 1}`,
-//   };
-//   reviews.push(review);
-// }
-
 const quantity = ref(1);
 
 const isFavorite = computed(() => {
-  return true;
+  const productInsideFavorites = favoritesStore.favorites.find((product) => {
+    return product.id === productDetails.value.id;
+  });
+
+  if (productInsideFavorites) {
+    return true;
+  }
+  return false;
 });
 
 const isInsideShoppingCard = computed(() => {
@@ -215,6 +212,7 @@ const isInsideShoppingCard = computed(() => {
 });
 
 const isShoppingCartBtnLoading = ref(false);
+const isFavoritesBtnLoading = ref(false);
 
 const pagination = {
   start: 0,
@@ -286,7 +284,25 @@ function scrollToReviewsSection() {
   });
 }
 
-function toggleFavorite() {}
+async function addToFavorites() {
+  try {
+    isFavoritesBtnLoading.value = true;
+    await favoritesStore.addToFavorites(productDetails.value);
+    await favoritesStore.fetchFavoriteProducts();
+  } finally {
+    isFavoritesBtnLoading.value = false;
+  }
+}
+async function removeFromFavorites() {
+  try {
+    isFavoritesBtnLoading.value = true;
+    await favoritesStore.removeFromFavorites(productDetails.value.id);
+    await favoritesStore.fetchFavoriteProducts();
+  } finally {
+    isFavoritesBtnLoading.value = false;
+  }
+}
+
 async function addToShoppingCart() {
   try {
     isShoppingCartBtnLoading.value = true;

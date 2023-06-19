@@ -1,12 +1,12 @@
 <template>
-  <q-page class="flex">
-    <div class="text-h5 q-mb-sm">Корзина <q-icon name="shopping_cart" /></div>
+  <q-page class="column">
+    <div class="text-h5 q-mb-sm">Корзина 🛒</div>
 
     <div
       v-if="isShoppingCartEmpty"
-      class="flex flex-center col-grow text-weight-medium"
+      class="flex flex-center col-grow text-weight-medium text-center"
     >
-      Корзина пуста, вперед за покупками 🌞
+      Корзина пуста, вперед за покупками 💸
     </div>
     <div v-else>
       <w-card
