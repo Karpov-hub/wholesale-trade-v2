@@ -60,6 +60,3 @@ export const convertObjectToCamelCase = (obj) => {
 
 // // const snake = convertObjectToSnakeCase(camelObj);
 // const camelObject = convertObjectToCamelCase(objectFirst);
-// console.log(camelObject);
-
-// console.log(snake);

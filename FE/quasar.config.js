@@ -99,6 +99,9 @@ module.exports = configure((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
+      // Quasar plugins
+      plugins: ["Notify", "Loading"],
+
       config: {
         notify: {
           position: "top",
@@ -122,9 +125,6 @@ module.exports = configure((/* ctx */) => {
       //
       // components: [],
       // directives: [],
-
-      // Quasar plugins
-      plugins: ["Notify", "Loading"],
     },
 
     // animations: 'all', // --- includes all animations

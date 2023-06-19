@@ -2,7 +2,6 @@ import { boot } from "quasar/wrappers";
 import axios from "axios";
 import { errorCodes } from "src/helpers/apiErrorCodes";
 import { Notify } from "quasar";
-import { useRouter } from "vue-router";
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
 // If any client changes this (global) instance, it might be a
@@ -40,8 +39,6 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    const router = useRouter();
-
     if (error === null) throw new Error("Unrecoverable error!! Error is null!");
     if (axios.isAxiosError(error)) {
       // here we have a type guard check, error inside this if will be treated as AxiosError
@@ -50,7 +47,7 @@ api.interceptors.response.use(
       // const config = error?.config;  here we have access the config used to make the api call (we can make a retry using this conf)
 
       if (error.code === "ERR_NETWORK") {
-        router.push({ name: "connectionError" });
+        console.log("network error");
       } else if (error.code === "ERR_CANCELED") {
         console.log("connection canceled..");
       }

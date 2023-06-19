@@ -34,6 +34,13 @@ const routes = [
           return import("src/pages/FavoritesPage.vue");
         },
       },
+      {
+        name: "shoppingCart",
+        path: "shopping-cart",
+        component: () => {
+          return import("src/pages/ShoppingCartPage.vue");
+        },
+      },
     ],
   },
   {

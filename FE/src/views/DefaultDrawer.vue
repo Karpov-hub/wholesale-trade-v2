@@ -89,7 +89,7 @@ const menuList = computed(() => {
     {
       props: {
         label: "Войти",
-        icon: "signin",
+        icon: "login",
         to: { name: "signin" },
         separator: false,
       },
@@ -128,6 +128,16 @@ const menuList = computed(() => {
           events: {},
         };
       }),
+    },
+    {
+      props: {
+        label: "Корзина",
+        icon: "shopping_cart",
+        to: { name: "shoppingCart" },
+        separator: true,
+      },
+      events: {},
+      isShown: true,
     },
     {
       props: {
