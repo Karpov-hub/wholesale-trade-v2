@@ -465,7 +465,7 @@ module.exports = {
         rating: 5,
         product_quantity: 50,
         image:
-          '["https://avatars.mds.yandex.net/get-mpic/5312993/img_id683095104744541357.jpeg/orig",]',
+          '["https://avatars.mds.yandex.net/get-mpic/5312993/img_id683095104744541357.jpeg/orig"]',
         description:
           "Портативная колонка JBL Charge 4 - мощная колонка с отличным качеством звука, водонепроницаемым корпусом и долгим временем работы от аккумулятора.",
       },
