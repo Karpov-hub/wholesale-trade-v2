@@ -21,7 +21,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-21",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications:
@@ -48,7 +48,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-29",
+          phone: "8-909-385-35-22",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications:
@@ -101,7 +101,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-24",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications: "[]",
@@ -127,7 +127,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-25",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications: "[]",
@@ -153,7 +153,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-26",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications: "[]",
@@ -179,7 +179,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-27",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications: "[]",
@@ -205,7 +205,7 @@ module.exports = {
             '[{"id": "ad694618-f86f-4d1c-a0a3-397535ff4b7c", "quantity": 15}, {"id": "8dd32056-d7f7-4b81-b998-37f8d930b99f", "quantity": 15}]',
           favorites:
             '["ad694618-f86f-4d1c-a0a3-397535ff4b7c", "6c526f82-0505-4bd5-bbd9-0c450e668edc"]',
-          phone: "8-909-385-35-23",
+          phone: "8-909-385-35-28",
           roll: 1,
           delivery_address: '["Блюхера, дом 20"]',
           notifications: "[]",
