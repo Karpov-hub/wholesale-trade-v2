@@ -9,7 +9,7 @@
       <q-card-section class="row q-col-gutter-sm">
         <div class="col-xs-12 col-sm-auto col-shrink flex flex-center">
           <q-img
-            :src="product.images[0].link"
+            :src="product.images?.[0]?.link || JSON.parse(product.image)[0]"
             :ratio="3 / 4"
             spinner-color="primary"
             spinner-size="82px"
@@ -34,10 +34,6 @@
     <div class="q-mt-sm flex justify-end">
       <w-btn>Купить</w-btn>
     </div>
-    <pre>
-       {{ product }}
-      </pre
-    >
   </q-page>
 </template>
 
