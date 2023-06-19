@@ -47,8 +47,9 @@
 
 <script setup>
 import { useForm } from "vee-validate";
-import { signup } from "src/services/userAuthService";
+import { signup, signin } from "src/services/userAuthService";
 import { useRouter } from "vue-router";
+import { emitter } from "src/helpers/emitter";
 
 const router = useRouter();
 
@@ -68,6 +69,18 @@ const onSubmit = handleSubmit(async (values) => {
   if (!response.success) {
     return;
   }
+
+  const signinResponse = await signin(values);
+
+  if (!signinResponse.success) {
+    return;
+  }
+
+  localStorage.setItem("sessionToken", signinResponse.sessionToken);
+
+  // reinitialize application after successful login
+  emitter.emit("login-state-changed");
+
   router.push({ name: "store" });
 });
 </script>

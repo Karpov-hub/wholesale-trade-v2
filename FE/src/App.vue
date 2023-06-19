@@ -5,10 +5,12 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 import { useLoadingStore } from "src/stores/loadingStore";
 import { useUserStore } from "src/stores/userStore";
 import { useQuasar, QSpinnerGears } from "quasar";
+import { getActivePinia } from "pinia";
+import { emitter } from "src/helpers/emitter";
 import { useShoppingCartStore } from "./stores/shoppingCartStore";
 import { useFavoritesStore } from "./stores/favoritesStore";
 
@@ -42,8 +44,32 @@ async function initializeApp() {
   loadingStore.isAppLoading = false;
   $q.loading.hide();
 }
+async function reinitializeApp() {
+  // clear all stores
+  // eslint-disable-next-line
+  getActivePinia()._s.forEach((store) => {
+    return store.$reset();
+  });
+
+  initializeApp();
+}
+
+emitter.on("login-state-changed", () => {
+  // eslint-disable-next-line
+  console.log("reinitialize");
+  reinitializeApp();
+});
 
 onMounted(async () => {
   initializeApp();
+
+  // setTimeout(() => {
+  //   emitter.emit("login-state-changed");
+  // }, 5000);
+});
+
+// Remove the event listener when the component is destroyed
+onBeforeUnmount(() => {
+  emitter.off("login-state-changed", reinitializeApp());
 });
 </script>

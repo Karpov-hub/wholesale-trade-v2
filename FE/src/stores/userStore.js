@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { getData } from "src/services/userProfileService";
 import { logout } from "src/services/authService";
+import { emitter } from "src/helpers/emitter";
 
 export const useUserStore = defineStore("userStore", {
   state: () => {
@@ -25,11 +26,15 @@ export const useUserStore = defineStore("userStore", {
       const response = await logout();
 
       if (!response.success) {
-        return;
+        return null;
       }
 
-      this.profile = null;
-      this.isAuthenticated = false;
+      localStorage.removeItem("sessionToken");
+
+      // Emit an event after a successful logout to reinitialize app
+      emitter.emit("login-state-changed");
+
+      return response;
     },
   },
 });

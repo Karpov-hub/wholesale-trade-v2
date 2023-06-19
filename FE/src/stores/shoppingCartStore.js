@@ -27,7 +27,6 @@ export const useShoppingCartStore = defineStore("shoppingCart", {
       });
 
       this.shoppingCart = response.rows;
-      console.log("shopping cart fetched", this.shoppingCart);
     },
 
     fetchShoppingCartLocal() {
@@ -36,7 +35,6 @@ export const useShoppingCartStore = defineStore("shoppingCart", {
       );
 
       this.shoppingCart = shoppingCartLocal || [];
-      console.log("shopping cart fetched", this.shoppingCart);
     },
 
     async addToShoppingCart(product, quantity) {

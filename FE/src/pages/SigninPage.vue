@@ -35,11 +35,10 @@ import { useForm } from "vee-validate";
 import { signin } from "src/services/userAuthService";
 import { signin as signinAdmin } from "src/services/authService";
 import { useRoute, useRouter } from "vue-router";
-import { useUserStore } from "src/stores/userStore";
+import { emitter } from "src/helpers/emitter";
 
 const route = useRoute();
 const router = useRouter();
-const userStore = useUserStore();
 
 const validationSchema = {
   phone: "required",
@@ -55,6 +54,8 @@ const onSubmit = handleSubmit(async (values) => {
     await signinAdmin(values);
     // FIXME: admin login no more required
   } else {
+    // Emit an event after a successful login to reinitialize app
+
     const response = await signin(values);
 
     if (!response.success) {
@@ -62,7 +63,9 @@ const onSubmit = handleSubmit(async (values) => {
     }
 
     localStorage.setItem("sessionToken", response.sessionToken);
-    userStore.isAuthenticated = true;
+
+    // reinitialize application after successful login
+    emitter.emit("login-state-changed");
 
     router.push({ name: "store" });
   }
